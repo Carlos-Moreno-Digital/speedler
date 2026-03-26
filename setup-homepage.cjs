@@ -47,29 +47,15 @@ async function setup() {
       { name: 'Novedades', type: 'collection_products', settings: { collectionId: newCollId, count: 8 }, sort: 3 },
     ];
 
+    // Delete existing test widget
+    await client.query(`DELETE FROM widget WHERE name = 'Test'`);
+
     for (const w of widgets) {
-      const settingsStr = JSON.stringify(w.settings);
-      try {
-        await client.query(
-          `INSERT INTO widget (uuid, name, type, settings, sort_order, status, route, area) VALUES ($1, $2, $3, $4, $5, true, 'homepage', 'content')`,
-          [crypto.randomUUID(), w.name, w.type, settingsStr, w.sort]
-        );
-        console.log('Widget created:', w.name);
-      } catch (e) {
-        console.log('Widget error for', w.name, ':', e.message);
-        // Try without cast
-        try {
-          await client.query(
-            `INSERT INTO widget (uuid, name, type, sort_order, status, route, area) VALUES ($1, $2, $3, $4, true, 'homepage', 'content')`,
-            [crypto.randomUUID(), w.name, w.type, w.sort]
-          );
-          // Update settings separately
-          await client.query(`UPDATE widget SET settings = $1 WHERE name = $2`, [settingsStr, w.name]);
-          console.log('Widget created (fallback):', w.name);
-        } catch (e2) {
-          console.log('Widget fallback error:', e2.message);
-        }
-      }
+      await client.query(
+        `INSERT INTO widget (uuid, name, type, settings, sort_order, status, route, area) VALUES ($1::uuid, $2, $3, $4::jsonb, $5, true, $6::jsonb, $7::jsonb)`,
+        [crypto.randomUUID(), w.name, w.type, JSON.stringify(w.settings), w.sort, JSON.stringify(['homepage']), JSON.stringify(['content'])]
+      );
+      console.log('Widget created:', w.name);
     }
 
     // Categories in nav
