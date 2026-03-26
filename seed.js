@@ -130,7 +130,7 @@ async function main() {
     usedSlugs.add(slug);
 
     const salePrice = Math.round(p.coste * 1.25 * 100) / 100;
-    const imageUrl = p.fotografia ? p.fotografia : null;
+    const imageUrl = null; // Supplier image paths (e.g. /01901349.JPG) don't resolve to hosted URLs
 
     try {
       await prisma.product.upsert({

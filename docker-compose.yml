@@ -41,6 +41,23 @@ services:
       - "traefik.http.routers.speedler.tls.certresolver=mytlschallenge"
       - "traefik.http.services.speedler.loadbalancer.server.port=3000"
 
+  cron:
+    image: alpine:3.19
+    restart: unless-stopped
+    depends_on:
+      - app
+    environment:
+      CRON_SECRET: ${CRON_SECRET:-}
+    entrypoint: /bin/sh
+    command:
+      - -c
+      - |
+        apk add --no-cache curl
+        echo "*/15 * * * * curl -sf -X POST -H \"Authorization: Bearer $$CRON_SECRET\" http://app:3000/api/cron/supplier-sync > /proc/1/fd/1 2>&1" | crontab -
+        crond -f -l 2
+    networks:
+      - default
+
 volumes:
   postgres-data:
 
