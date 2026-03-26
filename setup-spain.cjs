@@ -71,7 +71,7 @@ async function setup() {
     for (const [name, value] of settings) {
       await client.query(`
         INSERT INTO setting (uuid, name, value, is_json)
-        VALUES (gen_random_uuid(), $1, $2, 0)
+        VALUES (gen_random_uuid(), $1, $2, false)
         ON CONFLICT (name) DO UPDATE SET value = $2
       `, [name, value]);
     }

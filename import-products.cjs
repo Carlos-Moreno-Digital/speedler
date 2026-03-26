@@ -280,10 +280,9 @@ async function main() {
         await client.query(
           `UPDATE product SET
              price = $1, weight = $2, status = $3, visibility = $4,
-             group_id = $5, manage_stock = $6, stock_availability = $7,
-             category_id = $8
-           WHERE product_id = $9`,
-          [price, peso, true, true, 1, true, stockAvailability, categoryId, productId]
+             group_id = $5, category_id = $6
+           WHERE product_id = $7`,
+          [price, peso, true, true, 1, categoryId, productId]
         );
 
         await client.query(
@@ -310,10 +309,10 @@ async function main() {
         // Insert new product
         const uuid = crypto.randomUUID();
         const prodRes = await client.query(
-          `INSERT INTO product (uuid, sku, price, weight, status, visibility, group_id, manage_stock, stock_availability, tax_class, category_id)
-           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+          `INSERT INTO product (uuid, sku, price, weight, status, visibility, group_id, tax_class, category_id)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
            RETURNING product_id`,
-          [uuid, sku, price, peso, true, true, 1, true, stockAvailability, null, categoryId]
+          [uuid, sku, price, peso, true, true, 1, null, categoryId]
         );
         productId = prodRes.rows[0].product_id;
 
