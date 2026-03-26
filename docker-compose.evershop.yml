@@ -29,8 +29,8 @@ services:
     volumes:
       - ./config:/app/config
       - ./extensions:/app/extensions
-      - ./import-products.js:/app/import-products.js
-      - ./setup-spain.js:/app/setup-spain.js
+      - ./import-products.cjs:/app/import-products.cjs
+      - ./setup-spain.cjs:/app/setup-spain.cjs
       - ./ProductosPropios.csv:/app/ProductosPropios.csv
       - ./public/logo.png:/app/media/logo.png
       - evershop-media:/app/media
