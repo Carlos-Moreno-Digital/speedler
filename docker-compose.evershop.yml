@@ -20,6 +20,11 @@ services:
     image: evershop/evershop:latest
     restart: unless-stopped
     environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: postgres
       SUPPRESS_NO_CONFIG_WARNING: "true"
     volumes:
       - ./config:/app/config
