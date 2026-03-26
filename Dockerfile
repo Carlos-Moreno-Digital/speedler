@@ -3,7 +3,7 @@ FROM node:20 AS build
 WORKDIR /app
 
 COPY package.json ./
-RUN npm install --ignore-scripts --legacy-peer-deps && npm install sharp
+RUN npm install --ignore-scripts --legacy-peer-deps
 
 COPY . .
 RUN npx prisma generate
@@ -24,6 +24,7 @@ COPY --from=build /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=build /app/node_modules/@prisma ./node_modules/@prisma
 COPY --from=build /app/node_modules/prisma ./node_modules/prisma
 COPY --from=build /app/node_modules/sharp ./node_modules/sharp
+COPY --from=build /app/node_modules/@img ./node_modules/@img
 
 COPY entrypoint.sh ./
 RUN chmod +x entrypoint.sh
