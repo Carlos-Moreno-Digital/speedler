@@ -24,10 +24,10 @@ export default function FeaturedProducts() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const res = await fetch('/api/products?featured=true&limit=8');
+        const res = await fetch('/api/products?pageSize=8&sortBy=newest');
         if (res.ok) {
           const data = await res.json();
-          setProducts(data.data ?? data ?? []);
+          setProducts(Array.isArray(data.products) ? data.products : []);
         }
       } catch {
         // Silently fail - products will show empty state
