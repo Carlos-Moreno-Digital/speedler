@@ -6,28 +6,34 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: speedler
-      POSTGRES_PASSWORD: speedler_pass
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-speedler_pass}
       POSTGRES_DB: speedler_db
-    ports:
-      - "5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U speedler"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   app:
     build:
       context: .
       dockerfile: Dockerfile
+      target: production
     restart: unless-stopped
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: postgresql://speedler:speedler_pass@db:5432/speedler_db?schema=public
+      DATABASE_URL: postgresql://speedler:${POSTGRES_PASSWORD:-speedler_pass}@db:5432/speedler_db?schema=public
+      NEXTAUTH_URL: https://demo2.5tcgroup.com
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-change-me-in-production}
+      NEXT_PUBLIC_SITE_URL: https://demo2.5tcgroup.com
+      NEXT_PUBLIC_SITE_NAME: Speedler
+      NODE_ENV: production
     depends_on:
-      - db
-    volumes:
-      - .:/app
-      - /app/node_modules
-      - /app/.next
+      db:
+        condition: service_healthy
 
 volumes:
   postgres-data:
