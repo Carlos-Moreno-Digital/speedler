@@ -1,0 +1,53 @@
+{
+  "shop": {
+    "title": "Speedler",
+    "description": "Tu tienda de informática de confianza",
+    "currency": "EUR",
+    "language": "es",
+    "weightUnit": "kg",
+    "timezone": "Europe/Madrid"
+  },
+  "system": {
+    "database": {
+      "host": "db",
+      "port": 5432,
+      "database": "speedler_evershop",
+      "user": "speedler",
+      "password": "SpeedlerDB2024"
+    },
+    "session": {
+      "secret": "speedler-session-secret-change-in-production",
+      "cookie": {
+        "maxAge": 604800000
+      }
+    },
+    "file_storage": "local"
+  },
+  "catalog": {
+    "product": {
+      "image": {
+        "thumbnail": {
+          "width": 300,
+          "height": 300
+        },
+        "listing": {
+          "width": 500,
+          "height": 500
+        },
+        "single": {
+          "width": 1200,
+          "height": 1200
+        }
+      },
+      "showOutOfStockProducts": true
+    }
+  },
+  "checkout": {
+    "allowGuest": true
+  },
+  "tax": {
+    "rounding": "round",
+    "precision": 2,
+    "priceIncludingTax": true
+  }
+}
