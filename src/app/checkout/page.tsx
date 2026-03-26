@@ -46,7 +46,7 @@ export default function CheckoutPage() {
   const recargoAmount = isRecargoEquivalencia
     ? Math.round(subtotal * (reRate / 100) * 100) / 100
     : 0;
-  const shippingCost = subtotal >= 50 ? 0 : 5.99;
+  const shippingCost = subtotal >= 100 ? 0 : 5.99;
   const grandTotal =
     Math.round(
       (subtotal + canonDigitalTotal + ivaAmount + recargoAmount + shippingCost) *
@@ -507,7 +507,7 @@ export default function CheckoutPage() {
                         )}
                       </span>
                     </div>
-                    <div className="flex justify-between font-bold text-base border-t border-brand-peach/30 pt-2">
+                    <div className="flex justify-between font-bold text-base border-t border-gray-200 pt-2">
                       <span>Total</span>
                       <span className="text-[#008060]">
                         {formatPrice(grandTotal)}
