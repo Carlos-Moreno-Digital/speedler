@@ -22,28 +22,31 @@ function parseCsv(content) {
     if (cols.length < 22) continue;
     const coste = parseFloat((cols[19] || '0').replace(',', '.')) || 0;
     if (coste <= 0) continue;
+    const nombre = (cols[10] || '').trim();
+    const referencia = (cols[2] || '').trim();
+    if (!referencia) continue;
     products.push({
       idCategoria: parseInt(cols[0]) || 0,
       idFabricante: parseInt(cols[1]) || 0,
-      referencia: cols[2] || '',
-      partNumber: cols[3] || '',
-      upcCode: cols[4] || '',
+      referencia,
+      partNumber: (cols[3] || '').trim(),
+      upcCode: (cols[4] || '').trim(),
       peso: parseFloat((cols[5] || '0').replace(',', '.')) || 0,
-      fotografia: cols[6] || '',
+      fotografia: (cols[6] || '').trim(),
       oferta: cols[7] === '1',
-      fechaInicioOferta: cols[8] || '',
-      fechaFinOferta: cols[9] || '',
-      nombre: cols[10] || '',
-      resumen: cols[11] || '',
-      descripcion: cols[12] || '',
-      infoGeneral: cols[13] || '',
-      especificaciones: cols[14] || '',
-      accesorios: cols[15] || '',
+      fechaInicioOferta: (cols[8] || '').trim(),
+      fechaFinOferta: (cols[9] || '').trim(),
+      nombre: nombre || referencia,
+      resumen: (cols[11] || '').trim(),
+      descripcion: (cols[12] || '').trim(),
+      infoGeneral: (cols[13] || '').trim(),
+      especificaciones: (cols[14] || '').trim(),
+      accesorios: (cols[15] || '').trim(),
       stock: parseInt(cols[16]) || 0,
       tasas: parseFloat((cols[18] || '0').replace(',', '.')) || 0,
       coste: coste,
-      desCategoria: cols[20] || '',
-      desFabricante: cols[21] || '',
+      desCategoria: (cols[20] || '').trim(),
+      desFabricante: (cols[21] || '').trim(),
     });
   }
   return products;
@@ -69,15 +72,25 @@ async function main() {
     console.log('bcryptjs not found, skipping admin user');
   }
 
-  // Read CSV
+  // Read CSV - try latin1 first, fallback to utf8
   const csvPath = path.join(process.cwd(), 'ProductosPropios.csv');
   if (!fs.existsSync(csvPath)) {
     console.error('ProductosPropios.csv not found!');
     process.exit(1);
   }
-  const content = fs.readFileSync(csvPath, 'latin1');
-  const products = parseCsv(content);
+  let content = fs.readFileSync(csvPath, 'latin1');
+  let products = parseCsv(content);
+  // Verify names parsed - if all empty, try utf8
+  const namedCount = products.filter(p => p.nombre && p.nombre !== p.referencia).length;
+  if (namedCount === 0 && products.length > 0) {
+    console.log('latin1 parsing produced no names, trying utf8...');
+    content = fs.readFileSync(csvPath, 'utf8');
+    products = parseCsv(content);
+  }
   console.log(`Parsed ${products.length} products from CSV`);
+  if (products.length > 0) {
+    console.log(`Sample product: "${products[0].nombre}" (${products[0].referencia})`);
+  }
 
   // Categories
   const catMap = new Map();
@@ -135,7 +148,7 @@ async function main() {
     try {
       await prisma.product.upsert({
         where: { sku: p.referencia },
-        update: { name: p.nombre, costPrice: p.coste, salePrice, stock: p.stock, canonDigital: p.tasas, image: imageUrl },
+        update: { name: p.nombre || undefined, costPrice: p.coste, salePrice, stock: p.stock, canonDigital: p.tasas, image: imageUrl },
         create: {
           sku: p.referencia,
           partNumber: p.partNumber || null,
