@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { formatPrice } from '@/lib/utils';
 import { FiPackage, FiChevronRight, FiArrowLeft } from 'react-icons/fi';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 
 interface OrderItem {
   id: string;
@@ -64,13 +66,22 @@ export default function PedidosPage() {
 
   if (status === 'loading' || status === 'unauthenticated') {
     return (
-      <div className="min-h-screen bg-bg flex items-center justify-center">
-        <div className="animate-pulse text-gray-400">Cargando...</div>
-      </div>
+      <>
+        <Header />
+        <main>
+          <div className="min-h-screen bg-bg flex items-center justify-center">
+            <div className="animate-pulse text-gray-400">Cargando...</div>
+          </div>
+        </main>
+        <Footer />
+      </>
     );
   }
 
   return (
+    <>
+    <Header />
+    <main>
     <div className="min-h-screen bg-bg">
       <div className="container-custom py-8">
         <div className="flex items-center gap-4 mb-8">
@@ -272,5 +283,8 @@ export default function PedidosPage() {
         )}
       </div>
     </div>
+    </main>
+    <Footer />
+    </>
   );
 }

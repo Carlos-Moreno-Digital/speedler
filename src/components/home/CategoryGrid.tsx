@@ -33,7 +33,7 @@ export default function CategoryGrid() {
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const res = await fetch('/api/products?type=categories');
+        const res = await fetch('/api/categories');
         if (res.ok) {
           const data = await res.json();
           if (Array.isArray(data) && data.length > 0) {

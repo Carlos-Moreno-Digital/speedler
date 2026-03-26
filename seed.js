@@ -130,7 +130,7 @@ async function main() {
     usedSlugs.add(slug);
 
     const salePrice = Math.round(p.coste * 1.25 * 100) / 100;
-    const imageUrl = p.fotografia ? `https://images.speedler.es${p.fotografia}` : null;
+    const imageUrl = p.fotografia ? p.fotografia : null;
 
     try {
       await prisma.product.upsert({

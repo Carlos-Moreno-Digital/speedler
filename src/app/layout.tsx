@@ -17,11 +17,14 @@ export const metadata: Metadata = {
     'hardware',
     'speedler',
   ],
+  icons: {
+    icon: '/favicon.svg',
+  },
   openGraph: {
     title: 'Speedler - Tu tienda de informática',
     description:
       'Componentes informáticos, periféricos y electrónica al mejor precio.',
-    url: 'https://speedler.es',
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://speedler.es',
     siteName: 'Speedler',
     locale: 'es_ES',
     type: 'website',

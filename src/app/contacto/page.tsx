@@ -3,6 +3,8 @@
 import { useState, type FormEvent } from 'react';
 import toast from 'react-hot-toast';
 import { FiMail, FiPhone, FiMapPin, FiClock, FiSend } from 'react-icons/fi';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 
 export default function ContactoPage() {
   const [form, setForm] = useState({
@@ -47,6 +49,9 @@ export default function ContactoPage() {
   }
 
   return (
+    <>
+    <Header />
+    <main>
     <div className="min-h-screen bg-bg">
       <div className="container-custom py-12">
         <div className="text-center mb-12">
@@ -211,5 +216,8 @@ export default function ContactoPage() {
         </div>
       </div>
     </div>
+    </main>
+    <Footer />
+    </>
   );
 }

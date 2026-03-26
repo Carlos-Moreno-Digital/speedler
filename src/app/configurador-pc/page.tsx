@@ -5,6 +5,8 @@ import { useCart } from '@/hooks/useCart';
 import { formatPrice } from '@/lib/utils';
 import toast from 'react-hot-toast';
 import { FiCpu, FiHardDrive, FiMonitor, FiBox, FiZap, FiWind, FiShoppingCart, FiAlertTriangle, FiCheck, FiChevronDown } from 'react-icons/fi';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 
 interface ComponentOption {
   id: string;
@@ -174,6 +176,9 @@ export default function ConfiguradorPcPage() {
   const currentStepOptions = options[STEPS[activeStep].id] || [];
 
   return (
+    <>
+    <Header />
+    <main>
     <div className="min-h-screen bg-bg">
       <div className="container-custom py-8">
         <div className="mb-8">
@@ -407,5 +412,8 @@ export default function ConfiguradorPcPage() {
         </div>
       </div>
     </div>
+    </main>
+    <Footer />
+    </>
   );
 }

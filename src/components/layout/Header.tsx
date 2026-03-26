@@ -36,7 +36,7 @@ export default function Header({ cartItemCount = 0, user = null }: HeaderProps) 
 
   const navLinks = [
     { label: 'Tienda', href: '/tienda' },
-    { label: 'Configurador PC', href: '/configurador' },
+    { label: 'Configurador PC', href: '/configurador-pc' },
     { label: 'Contacto', href: '/contacto' },
   ];
 

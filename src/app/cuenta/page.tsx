@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { formatPrice } from '@/lib/utils';
 import { FiPackage, FiMapPin, FiUser, FiChevronRight, FiEdit2 } from 'react-icons/fi';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 
 interface Order {
   id: string;
@@ -47,15 +49,24 @@ export default function CuentaPage() {
 
   if (status === 'loading' || status === 'unauthenticated') {
     return (
-      <div className="min-h-screen bg-bg flex items-center justify-center">
-        <div className="animate-pulse text-gray-400">Cargando...</div>
-      </div>
+      <>
+        <Header />
+        <main>
+          <div className="min-h-screen bg-bg flex items-center justify-center">
+            <div className="animate-pulse text-gray-400">Cargando...</div>
+          </div>
+        </main>
+        <Footer />
+      </>
     );
   }
 
   const user = session?.user;
 
   return (
+    <>
+    <Header />
+    <main>
     <div className="min-h-screen bg-bg">
       <div className="container-custom py-8">
         <h1 className="text-3xl font-bold text-brand-brown-dark mb-8">
@@ -231,5 +242,8 @@ export default function CuentaPage() {
         </div>
       </div>
     </div>
+    </main>
+    <Footer />
+    </>
   );
 }
