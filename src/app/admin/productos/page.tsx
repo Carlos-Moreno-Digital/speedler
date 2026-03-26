@@ -37,8 +37,8 @@ export default function AdminProductsPage() {
 
     const res = await fetch(`/api/products?${params}`);
     const data = await res.json();
-    setProducts(data.data || []);
-    setTotalPages(data.totalPages || 1);
+    setProducts(data.products || []);
+    setTotalPages(data.pagination?.totalPages || 1);
     setLoading(false);
   }
 

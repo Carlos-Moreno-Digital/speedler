@@ -17,14 +17,10 @@ export async function GET(request: NextRequest) {
     const page = Math.max(1, parseInt(searchParams.get('page') || '1'));
     const pageSize = 20;
 
-    if (!userId) {
-      return NextResponse.json(
-        { error: 'userId is required' },
-        { status: 400 }
-      );
+    const where: Prisma.OrderWhereInput = {};
+    if (userId) {
+      where.userId = userId;
     }
-
-    const where: Prisma.OrderWhereInput = { userId };
 
     if (status) {
       where.status = status as Prisma.EnumOrderStatusFilter['equals'];
