@@ -38,7 +38,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.speedler.rule=Host(`demo2.5tcgroup.com`)"
       - "traefik.http.routers.speedler.entrypoints=websecure"
-      - "traefik.http.routers.speedler.tls.certresolver=myresolver"
+      - "traefik.http.routers.speedler.tls.certresolver=mytlschallenge"
       - "traefik.http.services.speedler.loadbalancer.server.port=3000"
 
 volumes:
