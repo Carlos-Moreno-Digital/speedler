@@ -12,18 +12,18 @@ interface Category {
 }
 
 const FALLBACK_CATEGORIES = [
-  { slug: 'procesadores', name: 'Procesadores', icon: '⚡' },
-  { slug: 'tarjetas-graficas', name: 'Tarjetas Gr\u00e1ficas', icon: '🎮' },
-  { slug: 'placas-base', name: 'Placas Base', icon: '🔧' },
-  { slug: 'memoria-ram', name: 'Memoria RAM', icon: '💾' },
-  { slug: 'almacenamiento', name: 'Almacenamiento', icon: '💿' },
-  { slug: 'fuentes-alimentacion', name: 'Fuentes de Alimentaci\u00f3n', icon: '🔌' },
-  { slug: 'cajas-torres', name: 'Cajas / Torres', icon: '🖥️' },
-  { slug: 'portatiles', name: 'Port\u00e1tiles', icon: '💻' },
-  { slug: 'monitores', name: 'Monitores', icon: '🖥️' },
-  { slug: 'perifericos', name: 'Perif\u00e9ricos', icon: '🖱️' },
-  { slug: 'redes', name: 'Redes', icon: '🌐' },
-  { slug: 'impresoras', name: 'Impresoras', icon: '🖨️' },
+  { slug: 'procesadores', name: 'Procesadores' },
+  { slug: 'tarjetas-graficas', name: 'Tarjetas Gr\u00e1ficas' },
+  { slug: 'placas-base', name: 'Placas Base' },
+  { slug: 'memoria-ram', name: 'Memoria RAM' },
+  { slug: 'almacenamiento', name: 'Almacenamiento' },
+  { slug: 'fuentes-alimentacion', name: 'Fuentes de Alimentaci\u00f3n' },
+  { slug: 'cajas-torres', name: 'Cajas / Torres' },
+  { slug: 'portatiles', name: 'Port\u00e1tiles' },
+  { slug: 'monitores', name: 'Monitores' },
+  { slug: 'perifericos', name: 'Perif\u00e9ricos' },
+  { slug: 'redes', name: 'Redes' },
+  { slug: 'impresoras', name: 'Impresoras' },
 ];
 
 export default function CategoryGrid() {
@@ -50,37 +50,35 @@ export default function CategoryGrid() {
   }, []);
 
   return (
-    <section className="py-16 bg-bg-alt">
-      <div className="container-custom">
+    <section className="py-16 bg-gray-50">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-brand-brown-dark">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#3a3a3a]">
             Compra por categor&iacute;a
           </h2>
-          <p className="mt-2 text-gray-600">
+          <p className="mt-2 text-[#777] text-sm">
             Encuentra lo que necesitas navegando por nuestras categor&iacute;as
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {(categories.length > 0 ? categories : FALLBACK_CATEGORIES).map(
             (cat: any) => (
               <Link
                 key={cat.slug}
                 href={`/tienda?category=${cat.slug}`}
-                className="group bg-white rounded-xl p-6 text-center hover:shadow-lg transition-all duration-200 border border-gray-100 hover:border-brand-orange/30"
+                className="group bg-white border border-[#ebebeb] rounded-[6px] p-5 text-center hover:border-[#008060] hover:shadow-sm transition-all duration-200"
               >
-                <div className="w-14 h-14 mx-auto mb-3 bg-brand-cream/50 rounded-xl flex items-center justify-center group-hover:bg-brand-orange/10 transition-colors">
-                  {'icon' in cat ? (
-                    <span className="text-2xl">{(cat as { icon: string }).icon}</span>
-                  ) : cat.image ? (
+                <div className="w-12 h-12 mx-auto mb-3 bg-gray-50 rounded-[6px] flex items-center justify-center group-hover:bg-[#008060]/5 transition-colors">
+                  {cat.image ? (
                     <img
                       src={cat.image}
                       alt={cat.name}
-                      className="w-8 h-8 object-contain"
+                      className="w-7 h-7 object-contain"
                     />
                   ) : (
                     <svg
-                      className="w-7 h-7 text-brand-orange"
+                      className="w-6 h-6 text-[#999] group-hover:text-[#008060] transition-colors"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -94,11 +92,11 @@ export default function CategoryGrid() {
                     </svg>
                   )}
                 </div>
-                <h3 className="text-sm font-semibold text-gray-700 group-hover:text-brand-orange transition-colors">
+                <h3 className="text-sm font-medium text-[#3a3a3a] group-hover:text-[#008060] transition-colors">
                   {cat.name}
                 </h3>
                 {'_count' in cat && cat._count && (
-                  <p className="text-xs text-gray-400 mt-1">
+                  <p className="text-xs text-[#999] mt-1">
                     {cat._count.products} productos
                   </p>
                 )}

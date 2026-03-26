@@ -79,16 +79,21 @@ export default function ShopContent({
     <div className="space-y-6">
       {/* Categories */}
       <div>
-        <h3 className="font-semibold text-brand-brown-dark mb-3">Categorías</h3>
-        <ul className="space-y-1">
+        <h3 className="text-sm font-semibold uppercase tracking-[0.05em] mb-3" style={{ color: '#3a3a3a' }}>
+          Categorías
+        </h3>
+        <ul className="space-y-0.5">
           <li>
             <button
               onClick={() => handleFilterChange('category', undefined)}
-              className={`text-sm w-full text-left px-3 py-1.5 rounded-lg transition-colors ${
+              className={`text-sm w-full text-left px-3 py-2 rounded transition-colors ${
                 !currentFilters.category
-                  ? 'bg-brand-orange text-white'
-                  : 'text-gray-600 hover:bg-brand-cream'
+                  ? 'font-semibold'
+                  : 'hover:bg-gray-50'
               }`}
+              style={{
+                color: !currentFilters.category ? '#008060' : '#777',
+              }}
             >
               Todas las categorías
             </button>
@@ -97,11 +102,14 @@ export default function ShopContent({
             <li key={cat.id}>
               <button
                 onClick={() => handleFilterChange('category', cat.slug)}
-                className={`text-sm w-full text-left px-3 py-1.5 rounded-lg transition-colors ${
+                className={`text-sm w-full text-left px-3 py-2 rounded transition-colors ${
                   currentFilters.category === cat.slug
-                    ? 'bg-brand-orange text-white'
-                    : 'text-gray-600 hover:bg-brand-cream'
+                    ? 'font-semibold'
+                    : 'hover:bg-gray-50'
                 }`}
+                style={{
+                  color: currentFilters.category === cat.slug ? '#008060' : '#777',
+                }}
               >
                 {cat.name}
                 <span className="text-xs opacity-60 ml-1">
@@ -115,16 +123,21 @@ export default function ShopContent({
 
       {/* Manufacturers */}
       <div>
-        <h3 className="font-semibold text-brand-brown-dark mb-3">Fabricantes</h3>
-        <ul className="space-y-1 max-h-48 overflow-y-auto">
+        <h3 className="text-sm font-semibold uppercase tracking-[0.05em] mb-3" style={{ color: '#3a3a3a' }}>
+          Fabricantes
+        </h3>
+        <ul className="space-y-0.5 max-h-48 overflow-y-auto">
           <li>
             <button
               onClick={() => handleFilterChange('manufacturer', undefined)}
-              className={`text-sm w-full text-left px-3 py-1.5 rounded-lg transition-colors ${
+              className={`text-sm w-full text-left px-3 py-2 rounded transition-colors ${
                 !currentFilters.manufacturer
-                  ? 'bg-brand-orange text-white'
-                  : 'text-gray-600 hover:bg-brand-cream'
+                  ? 'font-semibold'
+                  : 'hover:bg-gray-50'
               }`}
+              style={{
+                color: !currentFilters.manufacturer ? '#008060' : '#777',
+              }}
             >
               Todos los fabricantes
             </button>
@@ -133,11 +146,14 @@ export default function ShopContent({
             <li key={m.id}>
               <button
                 onClick={() => handleFilterChange('manufacturer', m.slug)}
-                className={`text-sm w-full text-left px-3 py-1.5 rounded-lg transition-colors ${
+                className={`text-sm w-full text-left px-3 py-2 rounded transition-colors ${
                   currentFilters.manufacturer === m.slug
-                    ? 'bg-brand-orange text-white'
-                    : 'text-gray-600 hover:bg-brand-cream'
+                    ? 'font-semibold'
+                    : 'hover:bg-gray-50'
                 }`}
+                style={{
+                  color: currentFilters.manufacturer === m.slug ? '#008060' : '#777',
+                }}
               >
                 {m.name}
               </button>
@@ -148,23 +164,27 @@ export default function ShopContent({
 
       {/* Price range */}
       <div>
-        <h3 className="font-semibold text-brand-brown-dark mb-3">Precio</h3>
+        <h3 className="text-sm font-semibold uppercase tracking-[0.05em] mb-3" style={{ color: '#3a3a3a' }}>
+          Precio
+        </h3>
         <div className="flex gap-2 items-center">
           <input
             type="number"
             placeholder="Min"
             defaultValue={currentFilters.minPrice || ''}
-            className="input-field text-sm py-2"
+            className="w-full border border-[#ebebeb] rounded px-3 py-2 text-sm focus:outline-none focus:border-[#008060] transition-colors"
+            style={{ color: '#3a3a3a' }}
             onBlur={(e) =>
               handleFilterChange('minPrice', e.target.value || undefined)
             }
           />
-          <span className="text-gray-400">-</span>
+          <span style={{ color: '#777' }}>-</span>
           <input
             type="number"
             placeholder="Max"
             defaultValue={currentFilters.maxPrice || ''}
-            className="input-field text-sm py-2"
+            className="w-full border border-[#ebebeb] rounded px-3 py-2 text-sm focus:outline-none focus:border-[#008060] transition-colors"
+            style={{ color: '#3a3a3a' }}
             onBlur={(e) =>
               handleFilterChange('maxPrice', e.target.value || undefined)
             }
@@ -184,81 +204,50 @@ export default function ShopContent({
                 e.target.checked ? 'true' : undefined
               )
             }
-            className="w-4 h-4 rounded border-gray-300 text-brand-orange focus:ring-brand-orange"
+            className="w-4 h-4 rounded border-gray-300 accent-[#008060]"
           />
-          <span className="text-sm text-gray-700">Solo en stock</span>
+          <span className="text-sm" style={{ color: '#3a3a3a' }}>Solo en stock</span>
         </label>
       </div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-bg">
+    <div className="min-h-screen bg-white">
       <div className="container-custom py-8">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-brand-brown-dark">Tienda</h1>
-            <p className="text-gray-500 mt-1">
-              {total} producto{total !== 1 ? 's' : ''} encontrado
-              {total !== 1 ? 's' : ''}
-            </p>
-          </div>
-
-          <div className="flex items-center gap-3">
-            {/* Search */}
-            <form onSubmit={handleSearch} className="relative flex-1 md:w-64">
-              <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Buscar..."
-                className="input-field pl-10 text-sm py-2"
-              />
-            </form>
-
-            {/* Sort */}
-            <select
-              value={currentFilters.sortBy || 'newest'}
-              onChange={(e) => handleFilterChange('sortBy', e.target.value)}
-              className="input-field text-sm py-2 w-auto"
-            >
-              <option value="newest">Más recientes</option>
-              <option value="price_asc">Precio: menor a mayor</option>
-              <option value="price_desc">Precio: mayor a menor</option>
-              <option value="name">Nombre A-Z</option>
-            </select>
-
-            {/* Mobile filter toggle */}
-            <button
-              onClick={() => setShowMobileFilters(true)}
-              className="lg:hidden btn-secondary btn-sm"
-            >
-              <FiFilter className="w-4 h-4" />
-              Filtros
-            </button>
-          </div>
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold mb-1" style={{ color: '#3a3a3a' }}>Tienda</h1>
         </div>
 
-        <div className="flex gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
           {/* Desktop sidebar */}
-          <aside className="hidden lg:block w-64 flex-shrink-0">
-            <div className="card p-6 sticky top-24">
+          <aside className="hidden md:block md:col-span-1">
+            <div className="bg-white border border-[#ebebeb] rounded-md p-5 sticky top-24">
               <Sidebar />
             </div>
           </aside>
 
+          {/* Mobile filter button */}
+          <button
+            onClick={() => setShowMobileFilters(true)}
+            className="md:hidden fixed bottom-6 right-6 z-40 flex items-center gap-2 px-4 py-3 rounded-full shadow-lg text-white text-sm font-medium"
+            style={{ backgroundColor: '#008060' }}
+          >
+            <FiFilter className="w-4 h-4" />
+            Filtros
+          </button>
+
           {/* Mobile filter drawer */}
           {showMobileFilters && (
-            <div className="fixed inset-0 z-50 lg:hidden">
+            <div className="fixed inset-0 z-50 md:hidden">
               <div
                 className="absolute inset-0 bg-black/50"
                 onClick={() => setShowMobileFilters(false)}
               />
               <div className="absolute right-0 top-0 bottom-0 w-80 bg-white p-6 overflow-y-auto animate-slide-in">
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-lg font-bold text-brand-brown-dark">
+                  <h2 className="text-lg font-bold" style={{ color: '#3a3a3a' }}>
                     Filtros
                   </h2>
                   <button
@@ -273,32 +262,68 @@ export default function ShopContent({
             </div>
           )}
 
-          {/* Product grid */}
-          <div className="flex-1">
+          {/* Product grid + sorting + pagination */}
+          <div className="md:col-span-3">
+            {/* Sorting bar */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+              <div className="flex items-center gap-3 flex-1">
+                <form onSubmit={handleSearch} className="relative flex-1 sm:max-w-xs">
+                  <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: '#777' }} />
+                  <input
+                    type="text"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Buscar..."
+                    className="w-full border border-[#ebebeb] rounded pl-10 pr-3 py-2 text-sm focus:outline-none focus:border-[#008060] transition-colors"
+                    style={{ color: '#3a3a3a' }}
+                  />
+                </form>
+                <p className="text-sm hidden sm:block" style={{ color: '#777' }}>
+                  {total} resultado{total !== 1 ? 's' : ''}
+                </p>
+              </div>
+
+              <select
+                value={currentFilters.sortBy || 'newest'}
+                onChange={(e) => handleFilterChange('sortBy', e.target.value)}
+                className="border border-[#ebebeb] rounded px-3 py-2 text-sm focus:outline-none focus:border-[#008060] transition-colors w-auto"
+                style={{ color: '#3a3a3a' }}
+              >
+                <option value="newest">Más recientes</option>
+                <option value="price_asc">Precio: menor a mayor</option>
+                <option value="price_desc">Precio: mayor a menor</option>
+                <option value="name">Nombre A-Z</option>
+              </select>
+            </div>
+
             {products.length === 0 ? (
               <div className="text-center py-16">
-                <p className="text-lg text-gray-500 mb-4">
+                <p className="text-lg mb-4" style={{ color: '#777' }}>
                   No se encontraron productos
                 </p>
-                <Link href="/tienda" className="btn-primary btn-sm">
+                <Link
+                  href="/tienda"
+                  className="inline-block px-5 py-2 rounded text-sm font-medium text-white"
+                  style={{ backgroundColor: '#008060' }}
+                >
                   Ver todos los productos
                 </Link>
               </div>
             ) : (
               <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
                   {products.map((product) => (
                     <Link
                       key={product.id}
                       href={`/tienda/${product.slug}`}
-                      className="card group overflow-hidden"
+                      className="group bg-white border border-[#ebebeb] rounded-md overflow-hidden transition-shadow hover:shadow-md"
                     >
                       <div className="relative bg-gray-50 h-48 flex items-center justify-center overflow-hidden">
                         {product.image ? (
                           <img
                             src={product.image}
                             alt={product.name}
-                            className="object-contain h-full w-full p-4 group-hover:scale-105 transition-transform duration-300"
+                            className="object-contain h-full w-full p-4 group-hover:scale-110 transition-transform duration-300"
                           />
                         ) : (
                           <div className="text-gray-300">
@@ -318,35 +343,40 @@ export default function ShopContent({
                           </div>
                         )}
                         {product.stock === 0 && (
-                          <span className="absolute top-2 right-2 badge-red text-xs">
+                          <span className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded">
                             Agotado
                           </span>
                         )}
                       </div>
                       <div className="p-4">
                         {product.manufacturer && (
-                          <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">
+                          <p className="text-xs uppercase tracking-wide mb-1" style={{ color: '#777' }}>
                             {product.manufacturer.name}
                           </p>
                         )}
-                        <h3 className="font-medium text-gray-800 line-clamp-2 text-sm group-hover:text-brand-orange transition-colors">
+                        <h3
+                          className="font-medium text-sm line-clamp-2 group-hover:text-[#008060] transition-colors"
+                          style={{ color: '#3a3a3a' }}
+                        >
                           {product.name}
                         </h3>
                         {product.canonDigital > 0 && (
-                          <p className="text-xs text-gray-400 mt-1">
+                          <p className="text-xs mt-1" style={{ color: '#777' }}>
                             Canon digital: {formatPrice(product.canonDigital)}
                           </p>
                         )}
                         <div className="mt-3 flex items-center justify-between">
-                          <span className="text-lg font-bold text-brand-orange">
+                          <span className="text-lg font-bold" style={{ color: '#3a3a3a' }}>
                             {formatPrice(product.salePrice)}
                           </span>
                           {product.stock > 0 ? (
-                            <span className="text-xs text-green-600 font-medium">
+                            <span className="flex items-center gap-1 text-xs font-medium text-green-600">
+                              <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block"></span>
                               En stock
                             </span>
                           ) : (
-                            <span className="text-xs text-red-500 font-medium">
+                            <span className="flex items-center gap-1 text-xs font-medium text-red-500">
+                              <span className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block"></span>
                               Sin stock
                             </span>
                           )}
@@ -363,13 +393,13 @@ export default function ShopContent({
                       href={buildUrl({
                         page: String(Math.max(1, page - 1)),
                       })}
-                      className={`p-2 rounded-lg border ${
+                      className={`p-2 rounded border ${
                         page <= 1
-                          ? 'opacity-50 pointer-events-none border-gray-200'
-                          : 'border-gray-300 hover:bg-brand-cream'
+                          ? 'opacity-50 pointer-events-none border-[#ebebeb]'
+                          : 'border-[#ebebeb] hover:border-[#008060] transition-colors'
                       }`}
                     >
-                      <FiChevronLeft className="w-5 h-5" />
+                      <FiChevronLeft className="w-5 h-5" style={{ color: '#3a3a3a' }} />
                     </Link>
 
                     {Array.from({ length: totalPages }, (_, i) => i + 1)
@@ -382,15 +412,20 @@ export default function ShopContent({
                       .map((p, idx, arr) => (
                         <span key={p}>
                           {idx > 0 && arr[idx - 1] !== p - 1 && (
-                            <span className="px-2 text-gray-400">...</span>
+                            <span className="px-2" style={{ color: '#777' }}>...</span>
                           )}
                           <Link
                             href={buildUrl({ page: String(p) })}
-                            className={`w-10 h-10 inline-flex items-center justify-center rounded-lg text-sm font-medium ${
+                            className={`w-10 h-10 inline-flex items-center justify-center rounded text-sm border transition-colors ${
                               p === page
-                                ? 'bg-brand-orange text-white'
-                                : 'border border-gray-300 hover:bg-brand-cream'
+                                ? 'text-white font-bold border-[#008060]'
+                                : 'border-[#ebebeb] hover:border-[#008060]'
                             }`}
+                            style={
+                              p === page
+                                ? { backgroundColor: '#008060', color: '#fff' }
+                                : { color: '#3a3a3a' }
+                            }
                           >
                             {p}
                           </Link>
@@ -401,13 +436,13 @@ export default function ShopContent({
                       href={buildUrl({
                         page: String(Math.min(totalPages, page + 1)),
                       })}
-                      className={`p-2 rounded-lg border ${
+                      className={`p-2 rounded border ${
                         page >= totalPages
-                          ? 'opacity-50 pointer-events-none border-gray-200'
-                          : 'border-gray-300 hover:bg-brand-cream'
+                          ? 'opacity-50 pointer-events-none border-[#ebebeb]'
+                          : 'border-[#ebebeb] hover:border-[#008060] transition-colors'
                       }`}
                     >
-                      <FiChevronRight className="w-5 h-5" />
+                      <FiChevronRight className="w-5 h-5" style={{ color: '#3a3a3a' }} />
                     </Link>
                   </div>
                 )}

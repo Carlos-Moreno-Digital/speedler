@@ -35,13 +35,13 @@ export default function NewsletterForm() {
   }
 
   return (
-    <section className="py-16 gradient-brand">
-      <div className="container-custom">
+    <section className="py-16 bg-gray-50">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-3">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#3a3a3a] mb-3">
             No te pierdas nada
           </h2>
-          <p className="text-white/80 mb-8">
+          <p className="text-[#777] text-sm mb-8">
             Suscr&iacute;bete a nuestra newsletter y recibe ofertas exclusivas,
             novedades y descuentos directamente en tu email.
           </p>
@@ -56,25 +56,25 @@ export default function NewsletterForm() {
               }}
               placeholder="Tu email"
               required
-              className="flex-1 px-5 py-3.5 rounded-lg text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50"
+              className="flex-1 px-4 py-3 border border-[#ebebeb] rounded-[3px] text-[#3a3a3a] placeholder:text-[#999] focus:outline-none focus:ring-2 focus:ring-[#008060]/30 focus:border-[#008060] bg-white text-sm"
             />
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="px-8 py-3.5 bg-brand-brown-dark text-white font-semibold rounded-lg hover:bg-brand-brown-medium transition-colors disabled:opacity-50"
+              className="px-8 py-3 bg-[#008060] text-white font-semibold rounded-[3px] hover:bg-[#006e52] transition-colors disabled:opacity-50 text-sm"
             >
               {status === 'loading' ? 'Enviando...' : 'Suscribirme'}
             </button>
           </form>
 
           {status === 'success' && (
-            <p className="mt-4 text-green-200 font-medium animate-fade-in">{message}</p>
+            <p className="mt-4 text-[#008060] font-medium text-sm">{message}</p>
           )}
           {status === 'error' && (
-            <p className="mt-4 text-red-200 font-medium animate-fade-in">{message}</p>
+            <p className="mt-4 text-red-500 font-medium text-sm">{message}</p>
           )}
 
-          <p className="mt-4 text-white/50 text-xs">
+          <p className="mt-4 text-[#999] text-xs">
             Puedes darte de baja en cualquier momento. Sin spam, lo prometemos.
           </p>
         </div>

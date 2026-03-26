@@ -60,36 +60,36 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
   }
 
   return (
-    <div className="min-h-screen bg-bg">
+    <div className="min-h-screen bg-white">
       <div className="container-custom py-8">
         {/* Breadcrumbs */}
-        <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8">
-          <Link href="/" className="hover:text-brand-orange">
+        <nav className="flex items-center gap-2 text-xs mb-8" style={{ color: '#777' }}>
+          <Link href="/" className="hover:text-[#008060] transition-colors">
             Inicio
           </Link>
-          <span>/</span>
-          <Link href="/tienda" className="hover:text-brand-orange">
+          <span>&gt;</span>
+          <Link href="/tienda" className="hover:text-[#008060] transition-colors">
             Tienda
           </Link>
           {product.category && (
             <>
-              <span>/</span>
+              <span>&gt;</span>
               <Link
                 href={`/tienda?category=${product.category.slug}`}
-                className="hover:text-brand-orange"
+                className="hover:text-[#008060] transition-colors"
               >
                 {product.category.name}
               </Link>
             </>
           )}
-          <span>/</span>
-          <span className="text-gray-800 truncate max-w-xs">{product.name}</span>
+          <span>&gt;</span>
+          <span className="truncate max-w-xs" style={{ color: '#3a3a3a' }}>{product.name}</span>
         </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Image gallery */}
-          <div className="card p-8">
-            <div className="aspect-square bg-gray-50 rounded-xl flex items-center justify-center overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Image */}
+          <div className="bg-white border border-[#ebebeb] rounded-md p-6">
+            <div className="aspect-square bg-gray-50 rounded flex items-center justify-center overflow-hidden">
               {product.image ? (
                 <img
                   src={product.image}
@@ -113,91 +113,92 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
               )}
             </div>
             {product.isOffer && (
-              <span className="mt-4 inline-block badge-orange">Oferta</span>
+              <span className="mt-4 inline-block text-xs font-semibold uppercase px-3 py-1 rounded text-white" style={{ backgroundColor: '#008060' }}>
+                Oferta
+              </span>
             )}
           </div>
 
           {/* Product info */}
-          <div className="space-y-6">
+          <div className="space-y-5">
             {product.manufacturer && (
-              <p className="text-sm text-gray-500 uppercase tracking-wide">
+              <p className="text-xs uppercase tracking-wider" style={{ color: '#777' }}>
                 {product.manufacturer.name}
               </p>
             )}
-            <h1 className="text-2xl lg:text-3xl font-bold text-brand-brown-dark">
+            <h1 className="text-2xl font-bold" style={{ color: '#3a3a3a' }}>
               {product.name}
             </h1>
 
             {product.summary && (
-              <p className="text-gray-600 leading-relaxed">{product.summary}</p>
+              <p className="text-sm leading-relaxed" style={{ color: '#777' }}>{product.summary}</p>
             )}
 
-            {/* Price breakdown */}
-            <div className="card p-6 space-y-3">
+            {/* Price */}
+            <div className="space-y-2">
               <div className="flex items-baseline gap-3">
-                <span className="text-3xl font-bold text-brand-orange">
+                <span className="text-2xl font-bold" style={{ color: '#3a3a3a' }}>
                   {formatPrice(product.salePrice)}
                 </span>
-                <span className="text-sm text-gray-400">IVA incluido</span>
+                <span className="text-sm" style={{ color: '#777' }}>IVA incluido</span>
               </div>
               {product.canonDigital > 0 && (
-                <p className="text-sm text-gray-500">
+                <p className="text-sm" style={{ color: '#777' }}>
                   + Canon digital: {formatPrice(product.canonDigital)}
                 </p>
               )}
-              <p className="text-xs text-gray-400">SKU: {product.sku}</p>
+              <p className="text-xs" style={{ color: '#777' }}>SKU: {product.sku}</p>
             </div>
 
             {/* Stock status */}
             <div className="flex items-center gap-3">
               {product.stock > 0 ? (
-                <>
-                  <div className="flex items-center gap-2 text-green-600">
-                    <FiCheck className="w-5 h-5" />
-                    <span className="font-medium">En stock</span>
-                    <span className="text-sm text-gray-400">
-                      ({product.stock} disponible{product.stock > 1 ? 's' : ''})
-                    </span>
-                  </div>
-                </>
+                <div className="flex items-center gap-2 text-green-600">
+                  <FiCheck className="w-5 h-5" />
+                  <span className="font-medium text-sm">En stock</span>
+                  <span className="text-xs" style={{ color: '#777' }}>
+                    ({product.stock} disponible{product.stock > 1 ? 's' : ''})
+                  </span>
+                </div>
               ) : (
-                <span className="text-red-500 font-medium">
+                <span className="text-red-500 font-medium text-sm">
                   Temporalmente sin stock
                 </span>
               )}
             </div>
 
             {/* Shipping estimate */}
-            <div className="flex items-center gap-2 text-sm text-gray-600">
+            <div className="flex items-center gap-2 text-sm" style={{ color: '#777' }}>
               <FiTruck className="w-4 h-4" />
               <span>Envío estimado: 24-48h laborables</span>
             </div>
 
             {/* Quantity + Add to Cart */}
             {product.stock > 0 && (
-              <div className="flex items-center gap-4">
-                <div className="flex items-center border border-gray-300 rounded-lg">
+              <div className="space-y-3 pt-2">
+                <div className="flex items-center border border-[#ebebeb] rounded w-fit">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="p-3 hover:bg-gray-100 rounded-l-lg transition-colors"
+                    className="p-3 hover:bg-gray-50 transition-colors"
                   >
-                    <FiMinus className="w-4 h-4" />
+                    <FiMinus className="w-4 h-4" style={{ color: '#3a3a3a' }} />
                   </button>
-                  <span className="px-4 py-3 text-center min-w-[3rem] font-medium">
+                  <span className="px-5 py-3 text-center min-w-[3rem] font-medium text-sm" style={{ color: '#3a3a3a' }}>
                     {quantity}
                   </span>
                   <button
                     onClick={() =>
                       setQuantity(Math.min(product.stock, quantity + 1))
                     }
-                    className="p-3 hover:bg-gray-100 rounded-r-lg transition-colors"
+                    className="p-3 hover:bg-gray-50 transition-colors"
                   >
-                    <FiPlus className="w-4 h-4" />
+                    <FiPlus className="w-4 h-4" style={{ color: '#3a3a3a' }} />
                   </button>
                 </div>
                 <button
                   onClick={handleAddToCart}
-                  className="btn-primary flex-1 flex items-center justify-center gap-2"
+                  className="w-full flex items-center justify-center gap-2 rounded-sm py-3 text-lg font-medium uppercase tracking-wide text-white transition-opacity hover:opacity-90"
+                  style={{ backgroundColor: '#008060' }}
                 >
                   <FiShoppingCart className="w-5 h-5" />
                   Añadir al carrito
@@ -209,15 +210,16 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
 
         {/* Tabs: Description / Specs */}
         <div className="mt-16">
-          <div className="border-b border-gray-200">
+          <div className="border-b border-[#ebebeb]">
             <div className="flex gap-8">
               <button
                 onClick={() => setActiveTab('description')}
                 className={`pb-3 text-sm font-semibold border-b-2 transition-colors ${
                   activeTab === 'description'
-                    ? 'border-brand-orange text-brand-orange'
-                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                    ? 'border-[#008060] text-[#008060]'
+                    : 'border-transparent hover:text-[#3a3a3a]'
                 }`}
+                style={activeTab !== 'description' ? { color: '#777' } : undefined}
               >
                 Descripción
               </button>
@@ -225,9 +227,10 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
                 onClick={() => setActiveTab('specs')}
                 className={`pb-3 text-sm font-semibold border-b-2 transition-colors ${
                   activeTab === 'specs'
-                    ? 'border-brand-orange text-brand-orange'
-                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                    ? 'border-[#008060] text-[#008060]'
+                    : 'border-transparent hover:text-[#3a3a3a]'
                 }`}
+                style={activeTab !== 'specs' ? { color: '#777' } : undefined}
               >
                 Especificaciones
               </button>
@@ -241,7 +244,7 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
                     dangerouslySetInnerHTML={{ __html: product.description }}
                   />
                 ) : (
-                  <p className="text-gray-500">
+                  <p style={{ color: '#777' }}>
                     No hay descripción disponible para este producto.
                   </p>
                 )}
@@ -252,7 +255,7 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
                 {product.specs ? (
                   <div dangerouslySetInnerHTML={{ __html: product.specs }} />
                 ) : (
-                  <p className="text-gray-500">
+                  <p style={{ color: '#777' }}>
                     No hay especificaciones disponibles para este producto.
                   </p>
                 )}
@@ -264,22 +267,22 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
         {/* Related products */}
         {relatedProducts.length > 0 && (
           <div className="mt-12">
-            <h2 className="text-2xl font-bold text-brand-brown-dark mb-6">
+            <h2 className="text-2xl font-bold mb-6" style={{ color: '#3a3a3a' }}>
               Productos relacionados
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedProducts.map((rp) => (
                 <Link
                   key={rp.id}
                   href={`/tienda/${rp.slug}`}
-                  className="card group overflow-hidden"
+                  className="group bg-white border border-[#ebebeb] rounded-md overflow-hidden transition-shadow hover:shadow-md"
                 >
                   <div className="bg-gray-50 h-40 flex items-center justify-center overflow-hidden">
                     {rp.image ? (
                       <img
                         src={rp.image}
                         alt={rp.name}
-                        className="object-contain h-full w-full p-4 group-hover:scale-105 transition-transform duration-300"
+                        className="object-contain h-full w-full p-4 group-hover:scale-110 transition-transform duration-300"
                       />
                     ) : (
                       <svg
@@ -299,14 +302,17 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
                   </div>
                   <div className="p-4">
                     {rp.manufacturer && (
-                      <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">
+                      <p className="text-xs uppercase tracking-wide mb-1" style={{ color: '#777' }}>
                         {rp.manufacturer.name}
                       </p>
                     )}
-                    <h3 className="text-sm font-medium text-gray-800 line-clamp-2 group-hover:text-brand-orange transition-colors">
+                    <h3
+                      className="text-sm font-medium line-clamp-2 group-hover:text-[#008060] transition-colors"
+                      style={{ color: '#3a3a3a' }}
+                    >
                       {rp.name}
                     </h3>
-                    <span className="mt-2 block text-lg font-bold text-brand-orange">
+                    <span className="mt-2 block text-lg font-bold" style={{ color: '#3a3a3a' }}>
                       {formatPrice(rp.salePrice)}
                     </span>
                   </div>
