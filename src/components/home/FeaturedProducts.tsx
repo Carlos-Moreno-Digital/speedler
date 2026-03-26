@@ -39,20 +39,20 @@ export default function FeaturedProducts() {
   }, []);
 
   return (
-    <section className="py-16 bg-bg">
-      <div className="container-custom">
+    <section className="py-16 bg-white">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-10">
           <div>
-            <h2 className="text-3xl font-bold text-brand-brown-dark">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#3a3a3a]">
               Productos destacados
             </h2>
-            <p className="mt-2 text-gray-600">
+            <p className="mt-2 text-[#777] text-sm">
               Los productos m&aacute;s populares de nuestra tienda
             </p>
           </div>
           <Link
             href="/tienda"
-            className="hidden sm:inline-flex items-center text-brand-orange font-semibold hover:text-brand-orange-deep transition-colors"
+            className="hidden sm:inline-flex items-center text-sm text-[#777] hover:text-[#3a3a3a] transition-colors"
           >
             Ver todos
             <svg className="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -64,18 +64,18 @@ export default function FeaturedProducts() {
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="card animate-pulse">
-                <div className="bg-gray-200 h-48 rounded-t-xl" />
+              <div key={i} className="bg-white border border-[#ebebeb] rounded-[6px] animate-pulse">
+                <div className="bg-gray-100 h-48 rounded-t-[6px]" />
                 <div className="p-4 space-y-3">
-                  <div className="bg-gray-200 h-4 rounded w-3/4" />
-                  <div className="bg-gray-200 h-4 rounded w-1/2" />
-                  <div className="bg-gray-200 h-6 rounded w-1/3" />
+                  <div className="bg-gray-100 h-4 rounded w-3/4" />
+                  <div className="bg-gray-100 h-4 rounded w-1/2" />
+                  <div className="bg-gray-100 h-6 rounded w-1/3" />
                 </div>
               </div>
             ))}
           </div>
         ) : products.length === 0 ? (
-          <div className="text-center py-12 text-gray-500">
+          <div className="text-center py-12 text-[#777]">
             <p className="text-lg">No hay productos destacados disponibles</p>
           </div>
         ) : (
@@ -84,14 +84,14 @@ export default function FeaturedProducts() {
               <Link
                 key={product.id}
                 href={`/tienda/${product.slug}`}
-                className="card group overflow-hidden"
+                className="group bg-white border border-[#ebebeb] rounded-[6px] overflow-hidden hover:shadow-md transition-shadow duration-200"
               >
                 <div className="relative bg-gray-50 h-48 flex items-center justify-center overflow-hidden">
                   {product.image ? (
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="object-contain h-full w-full p-4 group-hover:scale-105 transition-transform duration-300"
+                      className="object-contain h-full w-full p-4 group-hover:scale-110 transition-transform duration-300"
                     />
                   ) : (
                     <div className="text-gray-300">
@@ -101,36 +101,36 @@ export default function FeaturedProducts() {
                     </div>
                   )}
                   {product.stock > 0 && product.stock <= 5 && (
-                    <span className="absolute top-2 right-2 badge-orange text-xs">
+                    <span className="absolute top-2 right-2 bg-orange-50 text-orange-600 text-xs font-medium px-2 py-0.5 rounded-[3px]">
                       &Uacute;ltimas unidades
                     </span>
                   )}
                   {product.stock === 0 && (
-                    <span className="absolute top-2 right-2 badge-red text-xs">
+                    <span className="absolute top-2 right-2 bg-red-50 text-red-500 text-xs font-medium px-2 py-0.5 rounded-[3px]">
                       Agotado
                     </span>
                   )}
                 </div>
                 <div className="p-4">
                   {product.manufacturer && (
-                    <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">
+                    <p className="text-xs text-[#777] uppercase tracking-wide mb-1">
                       {product.manufacturer.name}
                     </p>
                   )}
-                  <h3 className="font-medium text-gray-800 line-clamp-2 text-sm group-hover:text-brand-orange transition-colors">
+                  <h3 className="font-medium text-[#3a3a3a] line-clamp-2 text-sm group-hover:text-[#008060] transition-colors">
                     {product.name}
                   </h3>
                   {product.canonDigital > 0 && (
-                    <p className="text-xs text-gray-400 mt-1">
+                    <p className="text-xs text-[#999] mt-1">
                       Canon digital: {formatPrice(product.canonDigital)}
                     </p>
                   )}
                   <div className="mt-3 flex items-center justify-between">
-                    <span className="text-lg font-bold text-brand-orange">
+                    <span className="text-lg font-bold text-[#3a3a3a]">
                       {formatPrice(product.salePrice)}
                     </span>
                     {product.stock > 0 ? (
-                      <span className="text-xs text-green-600 font-medium">En stock</span>
+                      <span className="text-xs text-[#008060] font-medium">En stock</span>
                     ) : (
                       <span className="text-xs text-red-500 font-medium">Sin stock</span>
                     )}
@@ -142,7 +142,10 @@ export default function FeaturedProducts() {
         )}
 
         <div className="mt-8 text-center sm:hidden">
-          <Link href="/tienda" className="btn-primary btn-sm">
+          <Link
+            href="/tienda"
+            className="inline-flex items-center justify-center px-6 py-2.5 bg-[#008060] text-white font-semibold rounded-[3px] text-sm hover:bg-[#006e52] transition-colors"
+          >
             Ver todos los productos
           </Link>
         </div>
