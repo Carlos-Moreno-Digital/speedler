@@ -79,17 +79,31 @@ export async function runSupplierSync(supplierSyncId: string): Promise<SyncResul
       result.errors.push('No products parsed from data source');
       result.success = false;
     } else {
-      // Get existing products SKUs
+      // Get existing products with details for stock aggregation
       const existingProducts = await prisma.product.findMany({
-        select: { id: true, sku: true },
+        select: {
+          id: true,
+          sku: true,
+          partNumber: true,
+          name: true,
+          summary: true,
+          description: true,
+          image: true,
+          stock: true,
+        },
       });
-      const existingSkuSet = new Set(existingProducts.map((p) => p.sku));
-      const incomingSkuSet = new Set<string>();
+      const existingSkuMap = new Map(existingProducts.map((p) => [p.sku, p]));
+      // Also build a partNumber lookup for cross-matching
+      const existingPartNumberMap = new Map<string, typeof existingProducts[0]>();
+      for (const p of existingProducts) {
+        if (p.partNumber) {
+          existingPartNumberMap.set(p.partNumber, p);
+        }
+      }
 
       for (const p of products) {
         const sku = p.referencia;
         if (!sku) continue;
-        incomingSkuSet.add(sku);
 
         // Upsert category
         let categoryId: string | null = null;
@@ -117,28 +131,61 @@ export async function runSupplierSync(supplierSyncId: string): Promise<SyncResul
 
         const costPrice = p.coste;
         const salePrice = Math.round(costPrice * 1.25 * 100) / 100;
+        const supplierStock = p.stock || 0;
 
-        if (existingSkuSet.has(sku)) {
-          // Update existing
+        // Try to find existing product by SKU or partNumber
+        const existingBySku = existingSkuMap.get(sku);
+        const existingByPartNumber = p.partNumber
+          ? existingPartNumberMap.get(p.partNumber)
+          : undefined;
+        const existingProduct = existingBySku || existingByPartNumber;
+
+        if (existingProduct) {
+          // Product exists (own or from another supplier) - aggregate stock
+          // Only fill in fields that are currently null/empty
+          const updateData: Record<string, any> = {
+            stock: { increment: supplierStock },
+            isActive: true,
+          };
+
+          // Only update name if current is null/empty
+          if (!existingProduct.name) {
+            updateData.name = p.nombre;
+          }
+
+          // Only update summary if current is null/empty
+          if (!existingProduct.summary) {
+            updateData.summary = p.resumen || undefined;
+          }
+
+          // Only update description if current is null/empty
+          if (!existingProduct.description) {
+            updateData.description = p.descripcion || undefined;
+          }
+
+          // Only update image if current is null/empty
+          if (!existingProduct.image && p.fotografia) {
+            updateData.image = p.fotografia;
+          }
+
+          // Update category/manufacturer if not already set
+          if (categoryId) {
+            updateData.categoryId = categoryId;
+          }
+          if (manufacturerId) {
+            updateData.manufacturerId = manufacturerId;
+          }
+
           await prisma.product.update({
-            where: { sku },
-            data: {
-              costPrice,
-              salePrice,
-              stock: p.stock,
-              canonDigital: p.tasas,
-              name: p.nombre,
-              isActive: true,
-              categoryId,
-              manufacturerId,
-            },
+            where: { id: existingProduct.id },
+            data: updateData,
           });
           result.productsUpdated++;
         } else {
-          // Create new
+          // Product does not exist anywhere - create from supplier data
           const slug = generateProductSlug(p.nombre, sku);
           try {
-            await prisma.product.create({
+            const newProduct = await prisma.product.create({
               data: {
                 sku,
                 partNumber: p.partNumber || null,
@@ -149,7 +196,7 @@ export async function runSupplierSync(supplierSyncId: string): Promise<SyncResul
                 costPrice,
                 salePrice,
                 canonDigital: p.tasas,
-                stock: p.stock,
+                stock: supplierStock,
                 weight: p.peso,
                 image: p.fotografia || null,
                 categoryId,
@@ -157,6 +204,20 @@ export async function runSupplierSync(supplierSyncId: string): Promise<SyncResul
                 isActive: true,
               },
             });
+            // Add to maps so subsequent suppliers can aggregate
+            existingSkuMap.set(sku, {
+              id: newProduct.id,
+              sku,
+              partNumber: p.partNumber || null,
+              name: p.nombre,
+              summary: p.resumen || null,
+              description: p.descripcion || null,
+              image: p.fotografia || null,
+              stock: supplierStock,
+            });
+            if (p.partNumber) {
+              existingPartNumberMap.set(p.partNumber, existingSkuMap.get(sku)!);
+            }
             result.productsCreated++;
           } catch (error: any) {
             result.errors.push(`Failed to create product ${sku}: ${error.message}`);
@@ -164,17 +225,8 @@ export async function runSupplierSync(supplierSyncId: string): Promise<SyncResul
         }
       }
 
-      // Deactivate products not in feed
-      const skusToDeactivate = [...existingSkuSet].filter(
-        (sku) => !incomingSkuSet.has(sku)
-      );
-      if (skusToDeactivate.length > 0) {
-        const deactivated = await prisma.product.updateMany({
-          where: { sku: { in: skusToDeactivate }, isActive: true },
-          data: { isActive: false },
-        });
-        result.productsDeactivated = deactivated.count;
-      }
+      // Do NOT deactivate products missing from this supplier feed.
+      // Products may belong to own stock or other suppliers.
     }
 
     // Update sync log
