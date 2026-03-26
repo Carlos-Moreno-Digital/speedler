@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
     }
 
     const order = await prisma.order.findFirst({
-      where: { orderNumber: { contains: orderNumber } },
+      where: { orderNumber: orderNumber },
     });
 
     if (!order) {

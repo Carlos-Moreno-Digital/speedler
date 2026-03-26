@@ -69,7 +69,7 @@ export default function CuentaPage() {
     <main>
     <div className="min-h-screen bg-bg">
       <div className="container-custom py-8">
-        <h1 className="text-3xl font-bold text-brand-brown-dark mb-8">
+        <h1 className="text-3xl font-bold text-[#3a3a3a] mb-8">
           Mi cuenta
         </h1>
 
@@ -78,11 +78,11 @@ export default function CuentaPage() {
           <div className="lg:col-span-1">
             <div className="card p-6">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 rounded-full bg-brand-cream flex items-center justify-center">
-                  <FiUser className="w-7 h-7 text-brand-orange" />
+                <div className="w-14 h-14 rounded-full bg-gray-50 flex items-center justify-center">
+                  <FiUser className="w-7 h-7 text-[#008060]" />
                 </div>
                 <div>
-                  <p className="font-bold text-brand-brown-dark">
+                  <p className="font-bold text-[#3a3a3a]">
                     {user?.name}
                   </p>
                   <p className="text-sm text-gray-500">{user?.email}</p>
@@ -92,7 +92,7 @@ export default function CuentaPage() {
               <nav className="space-y-1">
                 <Link
                   href="/cuenta"
-                  className="flex items-center gap-3 px-4 py-3 rounded-lg bg-brand-orange text-white font-medium"
+                  className="flex items-center gap-3 px-4 py-3 rounded-lg bg-[#008060] text-white font-medium"
                 >
                   <FiUser className="w-5 h-5" />
                   Panel general
@@ -100,7 +100,7 @@ export default function CuentaPage() {
                 </Link>
                 <Link
                   href="/cuenta/pedidos"
-                  className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-brand-cream transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors"
                 >
                   <FiPackage className="w-5 h-5" />
                   Mis pedidos
@@ -108,7 +108,7 @@ export default function CuentaPage() {
                 </Link>
                 <Link
                   href="/cuenta/direcciones"
-                  className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-brand-cream transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors"
                 >
                   <FiMapPin className="w-5 h-5" />
                   Direcciones
@@ -123,10 +123,10 @@ export default function CuentaPage() {
             {/* Profile info */}
             <div className="card p-6">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-bold text-brand-brown-dark">
+                <h2 className="text-lg font-bold text-[#3a3a3a]">
                   Información personal
                 </h2>
-                <button className="text-sm text-brand-orange hover:text-brand-orange-deep font-medium flex items-center gap-1">
+                <button className="text-sm text-[#008060] hover:text-[#006e52] font-medium flex items-center gap-1">
                   <FiEdit2 className="w-4 h-4" />
                   Editar
                 </button>
@@ -160,12 +160,12 @@ export default function CuentaPage() {
             {/* Recent orders */}
             <div className="card p-6">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-bold text-brand-brown-dark">
+                <h2 className="text-lg font-bold text-[#3a3a3a]">
                   Pedidos recientes
                 </h2>
                 <Link
                   href="/cuenta/pedidos"
-                  className="text-sm text-brand-orange hover:text-brand-orange-deep font-medium"
+                  className="text-sm text-[#008060] hover:text-[#006e52] font-medium"
                 >
                   Ver todos
                 </Link>
@@ -192,7 +192,7 @@ export default function CuentaPage() {
                   <p>No tienes pedidos todavía</p>
                   <Link
                     href="/tienda"
-                    className="text-brand-orange hover:text-brand-orange-deep text-sm font-medium mt-2 inline-block"
+                    className="text-[#008060] hover:text-[#006e52] text-sm font-medium mt-2 inline-block"
                   >
                     Ir a la tienda
                   </Link>

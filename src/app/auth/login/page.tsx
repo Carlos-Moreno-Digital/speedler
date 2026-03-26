@@ -57,7 +57,7 @@ function LoginContent() {
           <Link href="/" className="text-3xl font-bold gradient-text">
             Speedler
           </Link>
-          <h1 className="text-2xl font-bold text-brand-brown-dark mt-4">
+          <h1 className="text-2xl font-bold text-[#3a3a3a] mt-4">
             Iniciar sesión
           </h1>
           <p className="text-gray-500 mt-2">
@@ -90,12 +90,11 @@ function LoginContent() {
                 <label className="block text-sm font-medium text-gray-700">
                   Contraseña
                 </label>
-                <Link
-                  href="/auth/recuperar"
-                  className="text-xs text-brand-orange hover:text-brand-orange-deep"
+                <span
+                  className="text-xs text-gray-400 cursor-default"
                 >
                   ¿Olvidaste tu contraseña?
-                </Link>
+                </span>
               </div>
               <div className="relative">
                 <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -126,7 +125,7 @@ function LoginContent() {
               ¿No tienes cuenta?{' '}
               <Link
                 href="/auth/registro"
-                className="text-brand-orange font-semibold hover:text-brand-orange-deep"
+                className="text-[#008060] font-semibold hover:text-[#006e52]"
               >
                 Regístrate
               </Link>

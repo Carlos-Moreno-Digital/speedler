@@ -11,13 +11,13 @@ export default function NotFound() {
       <main className="flex flex-col items-center justify-center min-h-[60vh] px-4 text-center">
         <h1
           className="text-8xl font-extrabold mb-4"
-          style={{ color: '#E88B2D' }}
+          style={{ color: '#008060' }}
         >
           404
         </h1>
         <h2
           className="text-2xl font-bold mb-2"
-          style={{ color: '#5B2C0E' }}
+          style={{ color: '#3a3a3a' }}
         >
           Pagina no encontrada
         </h2>
@@ -28,14 +28,14 @@ export default function NotFound() {
           <Link
             href="/"
             className="inline-block px-6 py-3 rounded-lg font-semibold text-white transition-colors hover:opacity-90"
-            style={{ backgroundColor: '#E88B2D' }}
+            style={{ backgroundColor: '#008060' }}
           >
             Volver al inicio
           </Link>
           <Link
             href="/tienda"
             className="inline-block px-6 py-3 rounded-lg font-semibold border-2 transition-colors hover:opacity-90"
-            style={{ borderColor: '#5B2C0E', color: '#5B2C0E' }}
+            style={{ borderColor: '#3a3a3a', color: '#3a3a3a' }}
           >
             Ir a la tienda
           </Link>

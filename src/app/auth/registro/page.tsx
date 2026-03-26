@@ -84,7 +84,7 @@ export default function RegistroPage() {
           <Link href="/" className="text-3xl font-bold gradient-text">
             Speedler
           </Link>
-          <h1 className="text-2xl font-bold text-brand-brown-dark mt-4">
+          <h1 className="text-2xl font-bold text-[#3a3a3a] mt-4">
             Crear cuenta
           </h1>
           <p className="text-gray-500 mt-2">
@@ -206,20 +206,20 @@ export default function RegistroPage() {
                 type="checkbox"
                 checked={acceptTerms}
                 onChange={(e) => setAcceptTerms(e.target.checked)}
-                className="w-4 h-4 mt-0.5 rounded border-gray-300 text-brand-orange focus:ring-brand-orange"
+                className="w-4 h-4 mt-0.5 rounded border-gray-300 text-[#008060] focus:ring-[#008060]"
               />
               <span className="text-sm text-gray-600">
                 Acepto los{' '}
                 <Link
-                  href="/aviso-legal"
-                  className="text-brand-orange hover:underline"
+                  href="/terminos"
+                  className="text-[#008060] hover:underline"
                 >
                   términos y condiciones
                 </Link>{' '}
                 y la{' '}
                 <Link
                   href="/privacidad"
-                  className="text-brand-orange hover:underline"
+                  className="text-[#008060] hover:underline"
                 >
                   política de privacidad
                 </Link>
@@ -241,7 +241,7 @@ export default function RegistroPage() {
               ¿Ya tienes cuenta?{' '}
               <Link
                 href="/auth/login"
-                className="text-brand-orange font-semibold hover:text-brand-orange-deep"
+                className="text-[#008060] font-semibold hover:text-[#006e52]"
               >
                 Inicia sesión
               </Link>

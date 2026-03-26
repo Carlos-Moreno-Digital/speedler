@@ -13,12 +13,12 @@ export default function PrivacidadPage() {
     <>
       <Header />
       <main className="min-h-screen bg-bg">
-        <section className="bg-gradient-to-br from-brand-brown-dark to-brand-brown py-12">
+        <section className="bg-[#3a3a3a] py-12">
           <div className="container-custom text-center">
             <h1 className="text-3xl font-bold text-white">
               Política de Privacidad
             </h1>
-            <p className="text-brand-cream mt-2">
+            <p className="text-gray-200 mt-2">
               Última actualización: marzo 2026
             </p>
           </div>
@@ -27,7 +27,7 @@ export default function PrivacidadPage() {
         <section className="container-custom py-12">
           <div className="max-w-3xl mx-auto card p-8 sm:p-10 space-y-8 text-gray-600 leading-relaxed">
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 1. Responsable del Tratamiento
               </h2>
               <ul className="space-y-1 mt-2">
@@ -40,7 +40,7 @@ export default function PrivacidadPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 2. Datos que Recopilamos
               </h2>
               <p>
@@ -59,7 +59,7 @@ export default function PrivacidadPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 3. Finalidad del Tratamiento
               </h2>
               <p>Los datos personales se tratan con las siguientes finalidades:</p>
@@ -76,7 +76,7 @@ export default function PrivacidadPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 4. Base Legal del Tratamiento
               </h2>
               <p>El tratamiento de tus datos se fundamenta en:</p>
@@ -89,7 +89,7 @@ export default function PrivacidadPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 5. Conservación de los Datos
               </h2>
               <p>
@@ -105,7 +105,7 @@ export default function PrivacidadPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 6. Destinatarios de los Datos
               </h2>
               <p>
@@ -125,7 +125,7 @@ export default function PrivacidadPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 7. Derechos del Usuario
               </h2>
               <p>
@@ -143,7 +143,7 @@ export default function PrivacidadPage() {
                 Para ejercer estos derechos, puedes enviar una solicitud a{' '}
                 <a
                   href="mailto:privacidad@speedler.es"
-                  className="text-brand-orange hover:text-brand-orange-deep underline"
+                  className="text-[#008060] hover:text-[#006e52] underline"
                 >
                   privacidad@speedler.es
                 </a>{' '}
@@ -157,7 +157,7 @@ export default function PrivacidadPage() {
                   href="https://www.aepd.es"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-brand-orange hover:text-brand-orange-deep underline"
+                  className="text-[#008060] hover:text-[#006e52] underline"
                 >
                   www.aepd.es
                 </a>
@@ -165,7 +165,7 @@ export default function PrivacidadPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 8. Medidas de Seguridad
               </h2>
               <p>
@@ -178,7 +178,7 @@ export default function PrivacidadPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 9. Modificaciones
               </h2>
               <p>
@@ -195,14 +195,14 @@ export default function PrivacidadPage() {
                 Para consultas sobre privacidad, contacta con nosotros en{' '}
                 <a
                   href="mailto:privacidad@speedler.es"
-                  className="text-brand-orange hover:text-brand-orange-deep underline"
+                  className="text-[#008060] hover:text-[#006e52] underline"
                 >
                   privacidad@speedler.es
                 </a>{' '}
                 o consulta nuestra{' '}
                 <a
                   href="/cookies"
-                  className="text-brand-orange hover:text-brand-orange-deep underline"
+                  className="text-[#008060] hover:text-[#006e52] underline"
                 >
                   política de cookies
                 </a>

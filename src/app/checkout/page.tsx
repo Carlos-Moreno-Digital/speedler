@@ -132,7 +132,7 @@ export default function CheckoutPage() {
         <main>
           <div className="min-h-screen bg-bg">
             <div className="container-custom py-16 text-center">
-              <h1 className="text-2xl font-bold text-brand-brown-dark mb-4">
+              <h1 className="text-2xl font-bold text-[#3a3a3a] mb-4">
                 No hay productos en el carrito
               </h1>
               <a href="/tienda" className="btn-primary">
@@ -227,7 +227,7 @@ export default function CheckoutPage() {
     <main>
     <div className="min-h-screen bg-bg">
       <div className="container-custom py-8">
-        <h1 className="text-3xl font-bold text-brand-brown-dark mb-8">
+        <h1 className="text-3xl font-bold text-[#3a3a3a] mb-8">
           Checkout
         </h1>
 
@@ -239,7 +239,7 @@ export default function CheckoutPage() {
                 onClick={() => i < step && setStep(i)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
                   i === step
-                    ? 'bg-brand-orange text-white'
+                    ? 'bg-[#008060] text-white'
                     : i < step
                       ? 'bg-green-100 text-green-700'
                       : 'bg-gray-100 text-gray-400'
@@ -266,7 +266,7 @@ export default function CheckoutPage() {
               {/* Step 0: Shipping */}
               {step === 0 && (
                 <div>
-                  <h2 className="text-xl font-bold text-brand-brown-dark mb-6">
+                  <h2 className="text-xl font-bold text-[#3a3a3a] mb-6">
                     Dirección de envío
                   </h2>
                   <AddressForm
@@ -279,7 +279,7 @@ export default function CheckoutPage() {
               {/* Step 1: Billing */}
               {step === 1 && (
                 <div>
-                  <h2 className="text-xl font-bold text-brand-brown-dark mb-6">
+                  <h2 className="text-xl font-bold text-[#3a3a3a] mb-6">
                     Dirección de facturación
                   </h2>
                   <label className="flex items-center gap-3 mb-6 cursor-pointer">
@@ -292,7 +292,7 @@ export default function CheckoutPage() {
                           useSameAddress: e.target.checked,
                         }))
                       }
-                      className="w-4 h-4 rounded border-gray-300 text-brand-orange focus:ring-brand-orange"
+                      className="w-4 h-4 rounded border-gray-300 text-[#008060] focus:ring-[#008060]"
                     />
                     <span className="text-sm text-gray-700">
                       Usar la misma dirección de envío
@@ -313,7 +313,7 @@ export default function CheckoutPage() {
                         onChange={(e) =>
                           setIsRecargoEquivalencia(e.target.checked)
                         }
-                        className="w-4 h-4 rounded border-gray-300 text-brand-orange focus:ring-brand-orange"
+                        className="w-4 h-4 rounded border-gray-300 text-[#008060] focus:ring-[#008060]"
                       />
                       <span className="text-sm text-gray-700">
                         Soy autónomo/empresa en régimen de recargo de
@@ -327,7 +327,7 @@ export default function CheckoutPage() {
               {/* Step 2: Payment */}
               {step === 2 && (
                 <div>
-                  <h2 className="text-xl font-bold text-brand-brown-dark mb-6">
+                  <h2 className="text-xl font-bold text-[#3a3a3a] mb-6">
                     Método de pago
                   </h2>
                   <div className="space-y-3">
@@ -352,7 +352,7 @@ export default function CheckoutPage() {
                         key={method.id}
                         className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-colors ${
                           data.paymentMethod === method.id
-                            ? 'border-brand-orange bg-brand-cream/30'
+                            ? 'border-[#008060] bg-gray-50'
                             : 'border-gray-200 hover:border-gray-300'
                         }`}
                       >
@@ -367,7 +367,7 @@ export default function CheckoutPage() {
                               paymentMethod: e.target.value as CheckoutData['paymentMethod'],
                             }))
                           }
-                          className="mt-1 w-4 h-4 border-gray-300 text-brand-orange focus:ring-brand-orange"
+                          className="mt-1 w-4 h-4 border-gray-300 text-[#008060] focus:ring-[#008060]"
                         />
                         <div>
                           <p className="font-medium text-gray-800">
@@ -399,7 +399,7 @@ export default function CheckoutPage() {
               {/* Step 3: Summary */}
               {step === 3 && (
                 <div>
-                  <h2 className="text-xl font-bold text-brand-brown-dark mb-6">
+                  <h2 className="text-xl font-bold text-[#3a3a3a] mb-6">
                     Resumen del pedido
                   </h2>
 
@@ -476,7 +476,7 @@ export default function CheckoutPage() {
                   </div>
 
                   {/* Tax breakdown */}
-                  <div className="bg-brand-cream/30 rounded-xl p-4 space-y-2 text-sm">
+                  <div className="bg-gray-50 rounded-xl p-4 space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span>Base imponible</span>
                       <span>{formatPrice(subtotal)}</span>
@@ -492,7 +492,7 @@ export default function CheckoutPage() {
                       <span>{formatPrice(ivaAmount)}</span>
                     </div>
                     {isRecargoEquivalencia && (
-                      <div className="flex justify-between text-brand-brown-dark">
+                      <div className="flex justify-between text-[#3a3a3a]">
                         <span>Recargo equivalencia ({reRate}%)</span>
                         <span>{formatPrice(recargoAmount)}</span>
                       </div>
@@ -509,7 +509,7 @@ export default function CheckoutPage() {
                     </div>
                     <div className="flex justify-between font-bold text-base border-t border-brand-peach/30 pt-2">
                       <span>Total</span>
-                      <span className="text-brand-orange">
+                      <span className="text-[#008060]">
                         {formatPrice(grandTotal)}
                       </span>
                     </div>
@@ -554,7 +554,7 @@ export default function CheckoutPage() {
           {/* Order sidebar */}
           <div className="lg:col-span-1">
             <div className="card p-6 sticky top-24">
-              <h3 className="font-bold text-brand-brown-dark mb-4">
+              <h3 className="font-bold text-[#3a3a3a] mb-4">
                 Tu pedido
               </h3>
               <div className="space-y-2 text-sm">
@@ -574,7 +574,7 @@ export default function CheckoutPage() {
                 <div className="border-t border-gray-200 pt-2 mt-2">
                   <div className="flex justify-between font-bold">
                     <span>Total</span>
-                    <span className="text-brand-orange">
+                    <span className="text-[#008060]">
                       {formatPrice(grandTotal)}
                     </span>
                   </div>

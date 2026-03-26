@@ -30,7 +30,7 @@ export default function CarritoPage() {
           <div className="min-h-screen bg-bg">
             <div className="container-custom py-16 text-center">
               <FiShoppingBag className="w-20 h-20 mx-auto text-gray-300 mb-6" />
-              <h1 className="text-2xl font-bold text-brand-brown-dark mb-3">
+              <h1 className="text-2xl font-bold text-[#3a3a3a] mb-3">
                 Tu carrito está vacío
               </h1>
               <p className="text-gray-500 mb-8">
@@ -54,7 +54,7 @@ export default function CarritoPage() {
     <div className="min-h-screen bg-bg">
       <div className="container-custom py-8">
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold text-brand-brown-dark">
+          <h1 className="text-3xl font-bold text-[#3a3a3a]">
             Carrito de compras
           </h1>
           <span className="text-gray-500">
@@ -100,7 +100,7 @@ export default function CarritoPage() {
                   <div className="flex-1 min-w-0">
                     <Link
                       href={`/tienda/${item.slug}`}
-                      className="font-medium text-gray-800 hover:text-brand-orange transition-colors line-clamp-2"
+                      className="font-medium text-gray-800 hover:text-[#008060] transition-colors line-clamp-2"
                     >
                       {item.name}
                     </Link>
@@ -139,7 +139,7 @@ export default function CarritoPage() {
                       </div>
 
                       <div className="flex items-center gap-4">
-                        <span className="font-bold text-brand-brown-dark">
+                        <span className="font-bold text-[#3a3a3a]">
                           {formatPrice(item.unitPrice * item.quantity)}
                         </span>
                         <button
@@ -159,7 +159,7 @@ export default function CarritoPage() {
             <div className="flex items-center justify-between">
               <Link
                 href="/tienda"
-                className="inline-flex items-center gap-2 text-sm text-brand-orange hover:text-brand-orange-deep font-medium"
+                className="inline-flex items-center gap-2 text-sm text-[#008060] hover:text-[#006e52] font-medium"
               >
                 <FiArrowLeft className="w-4 h-4" />
                 Seguir comprando
@@ -176,7 +176,7 @@ export default function CarritoPage() {
           {/* Order summary */}
           <div className="lg:col-span-1">
             <div className="card p-6 sticky top-24">
-              <h2 className="text-lg font-bold text-brand-brown-dark mb-4">
+              <h2 className="text-lg font-bold text-[#3a3a3a] mb-4">
                 Resumen del pedido
               </h2>
 
@@ -211,10 +211,10 @@ export default function CarritoPage() {
 
                 <div className="border-t border-gray-200 pt-3">
                   <div className="flex justify-between text-base">
-                    <span className="font-bold text-brand-brown-dark">
+                    <span className="font-bold text-[#3a3a3a]">
                       Total
                     </span>
-                    <span className="font-bold text-brand-orange text-lg">
+                    <span className="font-bold text-[#008060] text-lg">
                       {formatPrice(grandTotal)}
                     </span>
                   </div>
