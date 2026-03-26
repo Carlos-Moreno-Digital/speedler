@@ -175,7 +175,7 @@ export default function DireccionesPage() {
           <div className="flex items-center gap-4">
             <Link
               href="/cuenta"
-              className="p-2 rounded-lg hover:bg-brand-cream transition-colors"
+              className="p-2 rounded-lg hover:bg-gray-50 transition-colors"
             >
               <FiArrowLeft className="w-5 h-5 text-[#3a3a3a]" />
             </Link>
@@ -271,7 +271,7 @@ export default function DireccionesPage() {
                       onChange={(e) =>
                         updateField('isDefault', e.target.checked)
                       }
-                      className="w-4 h-4 rounded border-gray-300 text-[#008060] focus:ring-brand-orange"
+                      className="w-4 h-4 rounded border-gray-300 text-[#008060] focus:ring-[#008060]"
                     />
                     <span className="text-sm text-gray-700">
                       Dirección de envío por defecto
@@ -284,7 +284,7 @@ export default function DireccionesPage() {
                       onChange={(e) =>
                         updateField('isBilling', e.target.checked)
                       }
-                      className="w-4 h-4 rounded border-gray-300 text-[#008060] focus:ring-brand-orange"
+                      className="w-4 h-4 rounded border-gray-300 text-[#008060] focus:ring-[#008060]"
                     />
                     <span className="text-sm text-gray-700">
                       Dirección de facturación
@@ -372,7 +372,7 @@ export default function DireccionesPage() {
                   <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button
                       onClick={() => startEdit(addr)}
-                      className="p-2 text-gray-400 hover:text-[#008060] transition-colors rounded-lg hover:bg-brand-cream"
+                      className="p-2 text-gray-400 hover:text-[#008060] transition-colors rounded-lg hover:bg-gray-50"
                       aria-label="Editar"
                     >
                       <FiEdit2 className="w-4 h-4" />

@@ -206,7 +206,7 @@ export default function RegistroPage() {
                 type="checkbox"
                 checked={acceptTerms}
                 onChange={(e) => setAcceptTerms(e.target.checked)}
-                className="w-4 h-4 mt-0.5 rounded border-gray-300 text-[#008060] focus:ring-brand-orange"
+                className="w-4 h-4 mt-0.5 rounded border-gray-300 text-[#008060] focus:ring-[#008060]"
               />
               <span className="text-sm text-gray-600">
                 Acepto los{' '}
