@@ -182,7 +182,7 @@ export default function ConfiguradorPcPage() {
     <div className="min-h-screen bg-bg">
       <div className="container-custom py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-brand-brown-dark">
+          <h1 className="text-3xl font-bold text-[#3a3a3a]">
             Configurador de PC
           </h1>
           <p className="text-gray-500 mt-2">
@@ -194,7 +194,7 @@ export default function ConfiguradorPcPage() {
           {/* Steps sidebar */}
           <div className="lg:col-span-1">
             <div className="card p-4 sticky top-24">
-              <h3 className="font-semibold text-brand-brown-dark mb-4">
+              <h3 className="font-semibold text-[#3a3a3a] mb-4">
                 Componentes
               </h3>
               <div className="space-y-1">
@@ -204,10 +204,10 @@ export default function ConfiguradorPcPage() {
                     onClick={() => setActiveStep(i)}
                     className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-left transition-colors ${
                       i === activeStep
-                        ? 'bg-brand-orange text-white'
+                        ? 'bg-[#008060] text-white'
                         : selected[step.id]
                           ? 'bg-green-50 text-green-700'
-                          : 'text-gray-600 hover:bg-brand-cream'
+                          : 'text-gray-600 hover:bg-gray-50'
                     }`}
                   >
                     <span className="text-lg">{step.icon}</span>
@@ -262,9 +262,9 @@ export default function ConfiguradorPcPage() {
                     <span>{formatPrice(totalCanon)}</span>
                   </div>
                 )}
-                <div className="flex justify-between font-bold text-brand-brown-dark">
+                <div className="flex justify-between font-bold text-[#3a3a3a]">
                   <span>Total</span>
-                  <span className="text-brand-orange">
+                  <span className="text-[#008060]">
                     {formatPrice(totalPrice + totalCanon)}
                   </span>
                 </div>
@@ -289,7 +289,7 @@ export default function ConfiguradorPcPage() {
               <div className="flex items-center gap-3 mb-6">
                 <span className="text-2xl">{STEPS[activeStep].icon}</span>
                 <div>
-                  <h2 className="text-xl font-bold text-brand-brown-dark">
+                  <h2 className="text-xl font-bold text-[#3a3a3a]">
                     {STEPS[activeStep].label}
                   </h2>
                   <p className="text-sm text-gray-500">
@@ -332,10 +332,10 @@ export default function ConfiguradorPcPage() {
                         disabled={comp.stock === 0}
                         className={`text-left border-2 rounded-xl p-4 transition-all ${
                           isSelected
-                            ? 'border-brand-orange bg-brand-cream/30 ring-2 ring-brand-orange/20'
+                            ? 'border-[#008060] bg-gray-50 ring-2 ring-[#008060]/20'
                             : comp.stock === 0
                               ? 'border-gray-200 opacity-50 cursor-not-allowed'
-                              : 'border-gray-200 hover:border-brand-orange/50'
+                              : 'border-gray-200 hover:border-[#008060]/50'
                         }`}
                       >
                         <div className="flex gap-4">
@@ -362,7 +362,7 @@ export default function ConfiguradorPcPage() {
                               {comp.name}
                             </p>
                             <div className="flex items-center justify-between mt-2">
-                              <span className="font-bold text-brand-orange">
+                              <span className="font-bold text-[#008060]">
                                 {formatPrice(comp.salePrice)}
                               </span>
                               {comp.stock > 0 ? (
@@ -377,7 +377,7 @@ export default function ConfiguradorPcPage() {
                             </div>
                           </div>
                           {isSelected && (
-                            <FiCheck className="w-5 h-5 text-brand-orange flex-shrink-0 mt-1" />
+                            <FiCheck className="w-5 h-5 text-[#008060] flex-shrink-0 mt-1" />
                           )}
                         </div>
                       </button>

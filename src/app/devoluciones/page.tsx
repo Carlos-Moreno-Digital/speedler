@@ -13,12 +13,12 @@ export default function DevolucionesPage() {
     <>
       <Header />
       <main className="min-h-screen bg-bg">
-        <section className="bg-gradient-to-br from-brand-brown-dark to-brand-brown py-12">
+        <section className="bg-[#3a3a3a] py-12">
           <div className="container-custom text-center">
             <h1 className="text-3xl font-bold text-white">
               Política de Devoluciones
             </h1>
-            <p className="text-brand-cream mt-2">
+            <p className="text-gray-200 mt-2">
               14 días para devoluciones conforme a la normativa europea
             </p>
           </div>
@@ -29,22 +29,22 @@ export default function DevolucionesPage() {
             {/* Highlights */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="card p-5 text-center">
-                <div className="text-2xl font-bold text-brand-orange mb-1">14 días</div>
+                <div className="text-2xl font-bold text-[#008060] mb-1">14 días</div>
                 <div className="text-sm text-gray-500">Plazo de devolución</div>
               </div>
               <div className="card p-5 text-center">
-                <div className="text-2xl font-bold text-brand-orange mb-1">Gratuito</div>
+                <div className="text-2xl font-bold text-[#008060] mb-1">Gratuito</div>
                 <div className="text-sm text-gray-500">Sin coste por defecto</div>
               </div>
               <div className="card p-5 text-center">
-                <div className="text-2xl font-bold text-brand-orange mb-1">Reembolso</div>
+                <div className="text-2xl font-bold text-[#008060] mb-1">Reembolso</div>
                 <div className="text-sm text-gray-500">En 14 días hábiles</div>
               </div>
             </div>
 
             <div className="card p-8 sm:p-10 space-y-8 text-gray-600 leading-relaxed">
               <div>
-                <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+                <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                   1. Derecho de Desistimiento
                 </h2>
                 <p>
@@ -59,7 +59,7 @@ export default function DevolucionesPage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+                <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                   2. Condiciones de Devolución
                 </h2>
                 <p>Para que la devolución sea aceptada, el producto debe:</p>
@@ -84,7 +84,7 @@ export default function DevolucionesPage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+                <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                   3. Productos Excluidos
                 </h2>
                 <p>
@@ -113,19 +113,19 @@ export default function DevolucionesPage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+                <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                   4. Proceso de Devolución
                 </h2>
                 <p>Para iniciar una devolución, sigue estos pasos:</p>
                 <ol className="list-decimal list-inside mt-3 space-y-3">
                   <li>
                     <strong>Solicitud:</strong> Accede a tu cuenta en{' '}
-                    <a href="/cuenta/pedidos" className="text-brand-orange hover:text-brand-orange-deep underline">
+                    <a href="/cuenta/pedidos" className="text-[#008060] hover:text-[#006e52] underline">
                       Mis Pedidos
                     </a>{' '}
                     y selecciona el producto que deseas devolver, o envía un
                     email a{' '}
-                    <a href="mailto:devoluciones@speedler.es" className="text-brand-orange hover:text-brand-orange-deep underline">
+                    <a href="mailto:devoluciones@speedler.es" className="text-[#008060] hover:text-[#006e52] underline">
                       devoluciones@speedler.es
                     </a>{' '}
                     indicando el número de pedido y el motivo.
@@ -154,7 +154,7 @@ export default function DevolucionesPage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+                <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                   5. Reembolso
                 </h2>
                 <p>
@@ -172,7 +172,7 @@ export default function DevolucionesPage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+                <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                   6. Productos Defectuosos o Erróneos
                 </h2>
                 <p>
@@ -188,7 +188,7 @@ export default function DevolucionesPage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+                <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                   7. Garantía Legal
                 </h2>
                 <p>
@@ -202,7 +202,7 @@ export default function DevolucionesPage() {
               </div>
 
               <div className="border-t border-gray-200 pt-6">
-                <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+                <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                   ¿Necesitas Ayuda?
                 </h2>
                 <p>
@@ -212,20 +212,20 @@ export default function DevolucionesPage() {
                 <ul className="mt-3 space-y-2 text-sm">
                   <li>
                     Email:{' '}
-                    <a href="mailto:devoluciones@speedler.es" className="text-brand-orange hover:text-brand-orange-deep underline">
+                    <a href="mailto:devoluciones@speedler.es" className="text-[#008060] hover:text-[#006e52] underline">
                       devoluciones@speedler.es
                     </a>
                   </li>
                   <li>
                     Teléfono:{' '}
-                    <a href="tel:+34900000000" className="text-brand-orange hover:text-brand-orange-deep underline">
+                    <a href="tel:+34900000000" className="text-[#008060] hover:text-[#006e52] underline">
                       900 000 000
                     </a>{' '}
                     (Lun-Vie 9:00-18:00)
                   </li>
                   <li>
                     Formulario:{' '}
-                    <a href="/contacto" className="text-brand-orange hover:text-brand-orange-deep underline">
+                    <a href="/contacto" className="text-[#008060] hover:text-[#006e52] underline">
                       Página de contacto
                     </a>
                   </li>

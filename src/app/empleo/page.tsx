@@ -13,10 +13,10 @@ export default function EmpleoPage() {
     <>
       <Header />
       <main className="min-h-screen bg-bg">
-        <section className="bg-gradient-to-br from-brand-brown-dark to-brand-brown py-12">
+        <section className="bg-[#3a3a3a] py-12">
           <div className="container-custom text-center">
             <h1 className="text-3xl font-bold text-white">Empleo</h1>
-            <p className="text-brand-cream mt-2">
+            <p className="text-gray-200 mt-2">
               Únete al equipo de Speedler
             </p>
           </div>
@@ -25,9 +25,9 @@ export default function EmpleoPage() {
         <section className="container-custom py-16">
           <div className="max-w-2xl mx-auto text-center">
             <div className="card p-10 sm:p-14">
-              <div className="w-20 h-20 bg-brand-orange/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-20 h-20 bg-[#008060]/10 rounded-full flex items-center justify-center mx-auto mb-6">
                 <svg
-                  className="w-10 h-10 text-brand-orange"
+                  className="w-10 h-10 text-[#008060]"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -41,7 +41,7 @@ export default function EmpleoPage() {
                 </svg>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-brown-dark mb-4">
+              <h2 className="text-2xl font-bold text-[#3a3a3a] mb-4">
                 Estamos Creciendo
               </h2>
               <p className="text-gray-600 mb-6">
@@ -52,8 +52,8 @@ export default function EmpleoPage() {
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                <div className="bg-brand-orange/5 rounded-xl p-5 text-left">
-                  <div className="text-sm font-semibold text-brand-brown-dark mb-1">
+                <div className="bg-[#008060]/5 rounded-xl p-5 text-left">
+                  <div className="text-sm font-semibold text-[#3a3a3a] mb-1">
                     Ambiente Tecnológico
                   </div>
                   <div className="text-xs text-gray-500">
@@ -61,8 +61,8 @@ export default function EmpleoPage() {
                     tecnología.
                   </div>
                 </div>
-                <div className="bg-brand-orange/5 rounded-xl p-5 text-left">
-                  <div className="text-sm font-semibold text-brand-brown-dark mb-1">
+                <div className="bg-[#008060]/5 rounded-xl p-5 text-left">
+                  <div className="text-sm font-semibold text-[#3a3a3a] mb-1">
                     Crecimiento Profesional
                   </div>
                   <div className="text-xs text-gray-500">
@@ -70,16 +70,16 @@ export default function EmpleoPage() {
                     la empresa.
                   </div>
                 </div>
-                <div className="bg-brand-orange/5 rounded-xl p-5 text-left">
-                  <div className="text-sm font-semibold text-brand-brown-dark mb-1">
+                <div className="bg-[#008060]/5 rounded-xl p-5 text-left">
+                  <div className="text-sm font-semibold text-[#3a3a3a] mb-1">
                     Equipo Dinámico
                   </div>
                   <div className="text-xs text-gray-500">
                     Un equipo joven y motivado con pasión por lo que hace.
                   </div>
                 </div>
-                <div className="bg-brand-orange/5 rounded-xl p-5 text-left">
-                  <div className="text-sm font-semibold text-brand-brown-dark mb-1">
+                <div className="bg-[#008060]/5 rounded-xl p-5 text-left">
+                  <div className="text-sm font-semibold text-[#3a3a3a] mb-1">
                     Flexibilidad
                   </div>
                   <div className="text-xs text-gray-500">
@@ -89,8 +89,8 @@ export default function EmpleoPage() {
                 </div>
               </div>
 
-              <div className="bg-brand-cream/50 rounded-xl p-6 mb-6">
-                <h3 className="text-sm font-bold text-brand-brown-dark mb-2">
+              <div className="bg-gray-50 rounded-xl p-6 mb-6">
+                <h3 className="text-sm font-bold text-[#3a3a3a] mb-2">
                   ¿Te interesa trabajar con nosotros?
                 </h3>
                 <p className="text-sm text-gray-600">
@@ -99,7 +99,7 @@ export default function EmpleoPage() {
                 </p>
                 <a
                   href="mailto:empleo@speedler.es"
-                  className="inline-block mt-3 text-brand-orange hover:text-brand-orange-deep font-semibold underline"
+                  className="inline-block mt-3 text-[#008060] hover:text-[#006e52] font-semibold underline"
                 >
                   empleo@speedler.es
                 </a>

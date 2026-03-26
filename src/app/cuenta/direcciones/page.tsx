@@ -177,9 +177,9 @@ export default function DireccionesPage() {
               href="/cuenta"
               className="p-2 rounded-lg hover:bg-brand-cream transition-colors"
             >
-              <FiArrowLeft className="w-5 h-5 text-brand-brown-dark" />
+              <FiArrowLeft className="w-5 h-5 text-[#3a3a3a]" />
             </Link>
-            <h1 className="text-3xl font-bold text-brand-brown-dark">
+            <h1 className="text-3xl font-bold text-[#3a3a3a]">
               Mis direcciones
             </h1>
           </div>
@@ -194,7 +194,7 @@ export default function DireccionesPage() {
         {/* Form */}
         {showForm && (
           <div className="card p-6 sm:p-8 mb-8 animate-fade-in">
-            <h2 className="text-lg font-bold text-brand-brown-dark mb-6">
+            <h2 className="text-lg font-bold text-[#3a3a3a] mb-6">
               {editingId ? 'Editar dirección' : 'Nueva dirección'}
             </h2>
             <form onSubmit={handleSubmit}>
@@ -271,7 +271,7 @@ export default function DireccionesPage() {
                       onChange={(e) =>
                         updateField('isDefault', e.target.checked)
                       }
-                      className="w-4 h-4 rounded border-gray-300 text-brand-orange focus:ring-brand-orange"
+                      className="w-4 h-4 rounded border-gray-300 text-[#008060] focus:ring-brand-orange"
                     />
                     <span className="text-sm text-gray-700">
                       Dirección de envío por defecto
@@ -284,7 +284,7 @@ export default function DireccionesPage() {
                       onChange={(e) =>
                         updateField('isBilling', e.target.checked)
                       }
-                      className="w-4 h-4 rounded border-gray-300 text-brand-orange focus:ring-brand-orange"
+                      className="w-4 h-4 rounded border-gray-300 text-[#008060] focus:ring-brand-orange"
                     />
                     <span className="text-sm text-gray-700">
                       Dirección de facturación
@@ -332,7 +332,7 @@ export default function DireccionesPage() {
         ) : addresses.length === 0 && !showForm ? (
           <div className="card p-12 text-center">
             <FiMapPin className="w-16 h-16 mx-auto mb-4 text-gray-300" />
-            <h2 className="text-xl font-bold text-brand-brown-dark mb-2">
+            <h2 className="text-xl font-bold text-[#3a3a3a] mb-2">
               No tienes direcciones
             </h2>
             <p className="text-gray-500 mb-6">
@@ -372,7 +372,7 @@ export default function DireccionesPage() {
                   <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button
                       onClick={() => startEdit(addr)}
-                      className="p-2 text-gray-400 hover:text-brand-orange transition-colors rounded-lg hover:bg-brand-cream"
+                      className="p-2 text-gray-400 hover:text-[#008060] transition-colors rounded-lg hover:bg-brand-cream"
                       aria-label="Editar"
                     >
                       <FiEdit2 className="w-4 h-4" />

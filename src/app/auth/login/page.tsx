@@ -57,7 +57,7 @@ function LoginContent() {
           <Link href="/" className="text-3xl font-bold gradient-text">
             Speedler
           </Link>
-          <h1 className="text-2xl font-bold text-brand-brown-dark mt-4">
+          <h1 className="text-2xl font-bold text-[#3a3a3a] mt-4">
             Iniciar sesión
           </h1>
           <p className="text-gray-500 mt-2">
@@ -125,7 +125,7 @@ function LoginContent() {
               ¿No tienes cuenta?{' '}
               <Link
                 href="/auth/registro"
-                className="text-brand-orange font-semibold hover:text-brand-orange-deep"
+                className="text-[#008060] font-semibold hover:text-[#006e52]"
               >
                 Regístrate
               </Link>

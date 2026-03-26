@@ -14,12 +14,12 @@ export default function SobreNosotrosPage() {
       <Header />
       <main className="min-h-screen bg-bg">
         {/* Hero section */}
-        <section className="bg-gradient-to-br from-brand-brown-dark to-brand-brown py-16">
+        <section className="bg-[#3a3a3a] py-16">
           <div className="container-custom text-center">
             <h1 className="text-4xl font-bold text-white mb-4">
               Sobre Nosotros
             </h1>
-            <p className="text-brand-cream text-lg max-w-2xl mx-auto">
+            <p className="text-gray-200 text-lg max-w-2xl mx-auto">
               En Speedler creemos que la tecnología debe ser accesible, fiable y
               estar al alcance de todos. Somos tu tienda de informática de
               confianza.
@@ -31,7 +31,7 @@ export default function SobreNosotrosPage() {
         <section className="container-custom py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-2xl font-bold text-brand-brown-dark mb-4">
+              <h2 className="text-2xl font-bold text-[#3a3a3a] mb-4">
                 Nuestra Historia
               </h2>
               <p className="text-gray-600 mb-4">
@@ -56,8 +56,8 @@ export default function SobreNosotrosPage() {
             </div>
             <div className="bg-gradient-to-br from-brand-orange/10 to-brand-cream rounded-2xl p-10 flex items-center justify-center">
               <div className="text-center">
-                <div className="text-6xl font-bold text-brand-orange mb-2">S</div>
-                <div className="text-2xl font-bold text-brand-brown-dark">
+                <div className="text-6xl font-bold text-[#008060] mb-2">S</div>
+                <div className="text-2xl font-bold text-[#3a3a3a]">
                   Speedler
                 </div>
                 <div className="text-sm text-gray-500 mt-1">
@@ -71,15 +71,15 @@ export default function SobreNosotrosPage() {
         {/* Values */}
         <section className="bg-white py-16">
           <div className="container-custom">
-            <h2 className="text-2xl font-bold text-brand-brown-dark text-center mb-10">
+            <h2 className="text-2xl font-bold text-[#3a3a3a] text-center mb-10">
               Nuestros Valores
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center p-6">
-                <div className="w-16 h-16 bg-brand-orange/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl text-brand-orange font-bold">1</span>
+                <div className="w-16 h-16 bg-[#008060]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl text-[#008060] font-bold">1</span>
                 </div>
-                <h3 className="text-lg font-bold text-brand-brown-dark mb-2">
+                <h3 className="text-lg font-bold text-[#3a3a3a] mb-2">
                   Calidad Garantizada
                 </h3>
                 <p className="text-gray-600 text-sm">
@@ -89,10 +89,10 @@ export default function SobreNosotrosPage() {
                 </p>
               </div>
               <div className="text-center p-6">
-                <div className="w-16 h-16 bg-brand-orange/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl text-brand-orange font-bold">2</span>
+                <div className="w-16 h-16 bg-[#008060]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl text-[#008060] font-bold">2</span>
                 </div>
-                <h3 className="text-lg font-bold text-brand-brown-dark mb-2">
+                <h3 className="text-lg font-bold text-[#3a3a3a] mb-2">
                   Asesoramiento Experto
                 </h3>
                 <p className="text-gray-600 text-sm">
@@ -102,10 +102,10 @@ export default function SobreNosotrosPage() {
                 </p>
               </div>
               <div className="text-center p-6">
-                <div className="w-16 h-16 bg-brand-orange/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl text-brand-orange font-bold">3</span>
+                <div className="w-16 h-16 bg-[#008060]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl text-[#008060] font-bold">3</span>
                 </div>
-                <h3 className="text-lg font-bold text-brand-brown-dark mb-2">
+                <h3 className="text-lg font-bold text-[#3a3a3a] mb-2">
                   Precio Competitivo
                 </h3>
                 <p className="text-gray-600 text-sm">
@@ -131,7 +131,7 @@ export default function SobreNosotrosPage() {
                 key={stat.label}
                 className="card p-6 text-center"
               >
-                <div className="text-2xl font-bold text-brand-orange mb-1">
+                <div className="text-2xl font-bold text-[#008060] mb-1">
                   {stat.number}
                 </div>
                 <div className="text-sm text-gray-500">{stat.label}</div>
@@ -141,12 +141,12 @@ export default function SobreNosotrosPage() {
         </section>
 
         {/* CTA */}
-        <section className="bg-brand-brown-dark py-16">
+        <section className="bg-[#3a3a3a] py-16">
           <div className="container-custom text-center">
             <h2 className="text-2xl font-bold text-white mb-4">
               ¿Listo para encontrar lo que necesitas?
             </h2>
-            <p className="text-brand-cream mb-8 max-w-xl mx-auto">
+            <p className="text-gray-200 mb-8 max-w-xl mx-auto">
               Explora nuestro catálogo con miles de productos de las mejores
               marcas o utiliza nuestro configurador de PC para montar tu equipo
               ideal.
@@ -160,7 +160,7 @@ export default function SobreNosotrosPage() {
               </a>
               <a
                 href="/configurador-pc"
-                className="bg-white text-brand-brown-dark font-semibold px-6 py-3 rounded-xl hover:bg-brand-cream transition-colors"
+                className="bg-white text-[#3a3a3a] font-semibold px-6 py-3 rounded-xl hover:bg-gray-50 transition-colors"
               >
                 Configurador PC
               </a>

@@ -13,12 +13,12 @@ export default function CookiesPage() {
     <>
       <Header />
       <main className="min-h-screen bg-bg">
-        <section className="bg-gradient-to-br from-brand-brown-dark to-brand-brown py-12">
+        <section className="bg-[#3a3a3a] py-12">
           <div className="container-custom text-center">
             <h1 className="text-3xl font-bold text-white">
               Política de Cookies
             </h1>
-            <p className="text-brand-cream mt-2">
+            <p className="text-gray-200 mt-2">
               Última actualización: marzo 2026
             </p>
           </div>
@@ -27,7 +27,7 @@ export default function CookiesPage() {
         <section className="container-custom py-12">
           <div className="max-w-3xl mx-auto card p-8 sm:p-10 space-y-8 text-gray-600 leading-relaxed">
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 1. ¿Qué son las Cookies?
               </h2>
               <p>
@@ -40,7 +40,7 @@ export default function CookiesPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 2. ¿Qué Cookies Utilizamos?
               </h2>
               <p className="mb-4">
@@ -50,11 +50,11 @@ export default function CookiesPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-sm border-collapse">
                   <thead>
-                    <tr className="bg-brand-orange/10">
-                      <th className="text-left p-3 font-semibold text-brand-brown-dark border border-gray-200">Cookie</th>
-                      <th className="text-left p-3 font-semibold text-brand-brown-dark border border-gray-200">Tipo</th>
-                      <th className="text-left p-3 font-semibold text-brand-brown-dark border border-gray-200">Finalidad</th>
-                      <th className="text-left p-3 font-semibold text-brand-brown-dark border border-gray-200">Duración</th>
+                    <tr className="bg-[#008060]/10">
+                      <th className="text-left p-3 font-semibold text-[#3a3a3a] border border-gray-200">Cookie</th>
+                      <th className="text-left p-3 font-semibold text-[#3a3a3a] border border-gray-200">Tipo</th>
+                      <th className="text-left p-3 font-semibold text-[#3a3a3a] border border-gray-200">Finalidad</th>
+                      <th className="text-left p-3 font-semibold text-[#3a3a3a] border border-gray-200">Duración</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -94,12 +94,12 @@ export default function CookiesPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 3. Tipos de Cookies según su Finalidad
               </h2>
               <div className="space-y-4 mt-3">
                 <div>
-                  <h3 className="font-semibold text-brand-brown-dark">
+                  <h3 className="font-semibold text-[#3a3a3a]">
                     Cookies técnicas (necesarias)
                   </h3>
                   <p className="text-sm mt-1">
@@ -110,7 +110,7 @@ export default function CookiesPage() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-brand-brown-dark">
+                  <h3 className="font-semibold text-[#3a3a3a]">
                     Cookies de preferencias
                   </h3>
                   <p className="text-sm mt-1">
@@ -119,7 +119,7 @@ export default function CookiesPage() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-brand-brown-dark">
+                  <h3 className="font-semibold text-[#3a3a3a]">
                     Cookies analíticas
                   </h3>
                   <p className="text-sm mt-1">
@@ -130,7 +130,7 @@ export default function CookiesPage() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-brand-brown-dark">
+                  <h3 className="font-semibold text-[#3a3a3a]">
                     Cookies publicitarias
                   </h3>
                   <p className="text-sm mt-1">
@@ -143,7 +143,7 @@ export default function CookiesPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 4. ¿Cómo Gestionar las Cookies?
               </h2>
               <p>
@@ -174,7 +174,7 @@ export default function CookiesPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 5. Cookies de Terceros
               </h2>
               <p>
@@ -185,12 +185,12 @@ export default function CookiesPage() {
               </p>
               <ul className="list-disc list-inside mt-3 space-y-1 text-sm">
                 <li>
-                  <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-brand-orange hover:text-brand-orange-deep underline">
+                  <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#008060] hover:text-[#006e52] underline">
                     Google Analytics
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener noreferrer" className="text-brand-orange hover:text-brand-orange-deep underline">
+                  <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener noreferrer" className="text-[#008060] hover:text-[#006e52] underline">
                     Meta (Facebook)
                   </a>
                 </li>
@@ -198,7 +198,7 @@ export default function CookiesPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 6. Actualizaciones
               </h2>
               <p>
@@ -213,14 +213,14 @@ export default function CookiesPage() {
                 Para más información, consulta nuestra{' '}
                 <a
                   href="/privacidad"
-                  className="text-brand-orange hover:text-brand-orange-deep underline"
+                  className="text-[#008060] hover:text-[#006e52] underline"
                 >
                   política de privacidad
                 </a>{' '}
                 o{' '}
                 <a
                   href="/contacto"
-                  className="text-brand-orange hover:text-brand-orange-deep underline"
+                  className="text-[#008060] hover:text-[#006e52] underline"
                 >
                   contacta con nosotros
                 </a>

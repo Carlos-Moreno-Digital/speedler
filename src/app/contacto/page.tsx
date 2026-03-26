@@ -55,7 +55,7 @@ export default function ContactoPage() {
     <div className="min-h-screen bg-bg">
       <div className="container-custom py-12">
         <div className="text-center mb-12">
-          <h1 className="text-3xl font-bold text-brand-brown-dark">Contacto</h1>
+          <h1 className="text-3xl font-bold text-[#3a3a3a]">Contacto</h1>
           <p className="text-gray-500 mt-2 max-w-xl mx-auto">
             ¿Tienes alguna pregunta o necesitas ayuda? No dudes en contactarnos.
             Te responderemos lo antes posible.
@@ -66,7 +66,7 @@ export default function ContactoPage() {
           {/* Contact form */}
           <div className="lg:col-span-2">
             <div className="card p-6 sm:p-8">
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-6">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-6">
                 Envíanos un mensaje
               </h2>
               <form onSubmit={handleSubmit} className="space-y-5">
@@ -142,36 +142,36 @@ export default function ContactoPage() {
           {/* Company info */}
           <div className="space-y-6">
             <div className="card p-6">
-              <h3 className="font-bold text-brand-brown-dark mb-4">
+              <h3 className="font-bold text-[#3a3a3a] mb-4">
                 Información de contacto
               </h3>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <FiMail className="w-5 h-5 text-brand-orange mt-0.5" />
+                  <FiMail className="w-5 h-5 text-[#008060] mt-0.5" />
                   <div>
                     <p className="text-sm font-medium text-gray-700">Email</p>
                     <a
                       href="mailto:info@speedler.es"
-                      className="text-sm text-brand-orange hover:text-brand-orange-deep"
+                      className="text-sm text-[#008060] hover:text-[#006e52]"
                     >
                       info@speedler.es
                     </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <FiPhone className="w-5 h-5 text-brand-orange mt-0.5" />
+                  <FiPhone className="w-5 h-5 text-[#008060] mt-0.5" />
                   <div>
                     <p className="text-sm font-medium text-gray-700">Teléfono</p>
                     <a
                       href="tel:+34900000000"
-                      className="text-sm text-brand-orange hover:text-brand-orange-deep"
+                      className="text-sm text-[#008060] hover:text-[#006e52]"
                     >
                       900 000 000
                     </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <FiMapPin className="w-5 h-5 text-brand-orange mt-0.5" />
+                  <FiMapPin className="w-5 h-5 text-[#008060] mt-0.5" />
                   <div>
                     <p className="text-sm font-medium text-gray-700">
                       Dirección
@@ -184,7 +184,7 @@ export default function ContactoPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <FiClock className="w-5 h-5 text-brand-orange mt-0.5" />
+                  <FiClock className="w-5 h-5 text-[#008060] mt-0.5" />
                   <div>
                     <p className="text-sm font-medium text-gray-700">Horario</p>
                     <p className="text-sm text-gray-600">

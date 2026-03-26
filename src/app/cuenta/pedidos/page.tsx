@@ -87,11 +87,11 @@ export default function PedidosPage() {
         <div className="flex items-center gap-4 mb-8">
           <Link
             href="/cuenta"
-            className="p-2 rounded-lg hover:bg-brand-cream transition-colors"
+            className="p-2 rounded-lg hover:bg-gray-50 transition-colors"
           >
-            <FiArrowLeft className="w-5 h-5 text-brand-brown-dark" />
+            <FiArrowLeft className="w-5 h-5 text-[#3a3a3a]" />
           </Link>
-          <h1 className="text-3xl font-bold text-brand-brown-dark">
+          <h1 className="text-3xl font-bold text-[#3a3a3a]">
             Mis pedidos
           </h1>
         </div>
@@ -113,7 +113,7 @@ export default function PedidosPage() {
         ) : orders.length === 0 ? (
           <div className="card p-12 text-center">
             <FiPackage className="w-16 h-16 mx-auto mb-4 text-gray-300" />
-            <h2 className="text-xl font-bold text-brand-brown-dark mb-2">
+            <h2 className="text-xl font-bold text-[#3a3a3a] mb-2">
               No tienes pedidos
             </h2>
             <p className="text-gray-500 mb-6">
@@ -142,7 +142,7 @@ export default function PedidosPage() {
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                       <div>
-                        <p className="font-bold text-brand-brown-dark">
+                        <p className="font-bold text-[#3a3a3a]">
                           {order.orderNumber}
                         </p>
                         <p className="text-sm text-gray-500">
@@ -162,7 +162,7 @@ export default function PedidosPage() {
                         </p>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="text-lg font-bold text-brand-orange">
+                        <span className="text-lg font-bold text-[#008060]">
                           {formatPrice(Number(order.total))}
                         </span>
                         <span className={`badge text-xs ${st.color}`}>
@@ -200,7 +200,7 @@ export default function PedidosPage() {
                             <div className="flex-1 min-w-0">
                               <Link
                                 href={`/tienda/${item.product.slug}`}
-                                className="text-sm font-medium text-gray-800 hover:text-brand-orange truncate block"
+                                className="text-sm font-medium text-gray-800 hover:text-[#008060] truncate block"
                               >
                                 {item.product.name}
                               </Link>
@@ -225,7 +225,7 @@ export default function PedidosPage() {
                               href={`https://www.gls-spain.es/es/seguimiento-envios/?match=${order.shippingTrackingCode}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-brand-orange font-medium hover:underline"
+                              className="text-[#008060] font-medium hover:underline"
                             >
                               {order.shippingTrackingCode}
                             </a>
@@ -269,7 +269,7 @@ export default function PedidosPage() {
                               : formatPrice(Number(order.shippingCost))}
                           </span>
                         </div>
-                        <div className="flex justify-between font-bold text-brand-brown-dark pt-1 border-t border-gray-200">
+                        <div className="flex justify-between font-bold text-[#3a3a3a] pt-1 border-t border-gray-200">
                           <span>Total</span>
                           <span>{formatPrice(Number(order.total))}</span>
                         </div>

@@ -13,12 +13,12 @@ export default function TerminosPage() {
     <>
       <Header />
       <main className="min-h-screen bg-bg">
-        <section className="bg-gradient-to-br from-brand-brown-dark to-brand-brown py-12">
+        <section className="bg-[#3a3a3a] py-12">
           <div className="container-custom text-center">
             <h1 className="text-3xl font-bold text-white">
               Términos y Condiciones
             </h1>
-            <p className="text-brand-cream mt-2">
+            <p className="text-gray-200 mt-2">
               Última actualización: marzo 2026
             </p>
           </div>
@@ -27,7 +27,7 @@ export default function TerminosPage() {
         <section className="container-custom py-12">
           <div className="max-w-3xl mx-auto card p-8 sm:p-10 space-y-8 text-gray-600 leading-relaxed">
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 1. Información General
               </h2>
               <p>
@@ -45,7 +45,7 @@ export default function TerminosPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 2. Productos y Precios
               </h2>
               <p>
@@ -62,7 +62,7 @@ export default function TerminosPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 3. Proceso de Compra
               </h2>
               <p>
@@ -81,7 +81,7 @@ export default function TerminosPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 4. Métodos de Pago
               </h2>
               <p>
@@ -93,7 +93,7 @@ export default function TerminosPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 5. Envíos y Entregas
               </h2>
               <p>
@@ -111,7 +111,7 @@ export default function TerminosPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 6. Garantías
               </h2>
               <p>
@@ -128,7 +128,7 @@ export default function TerminosPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 7. Derecho de Desistimiento
               </h2>
               <p>
@@ -138,7 +138,7 @@ export default function TerminosPage() {
                 Para más información, consulta nuestra{' '}
                 <a
                   href="/devoluciones"
-                  className="text-brand-orange hover:text-brand-orange-deep underline"
+                  className="text-[#008060] hover:text-[#006e52] underline"
                 >
                   política de devoluciones
                 </a>
@@ -147,7 +147,7 @@ export default function TerminosPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 8. Propiedad Intelectual
               </h2>
               <p>
@@ -160,7 +160,7 @@ export default function TerminosPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 9. Limitación de Responsabilidad
               </h2>
               <p>
@@ -174,7 +174,7 @@ export default function TerminosPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-brand-brown-dark mb-3">
+              <h2 className="text-xl font-bold text-[#3a3a3a] mb-3">
                 10. Legislación Aplicable
               </h2>
               <p>
@@ -191,7 +191,7 @@ export default function TerminosPage() {
                   href="https://ec.europa.eu/consumers/odr"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-brand-orange hover:text-brand-orange-deep underline"
+                  className="text-[#008060] hover:text-[#006e52] underline"
                 >
                   https://ec.europa.eu/consumers/odr
                 </a>
@@ -203,7 +203,7 @@ export default function TerminosPage() {
                 Si tienes alguna pregunta sobre estos términos, no dudes en{' '}
                 <a
                   href="/contacto"
-                  className="text-brand-orange hover:text-brand-orange-deep underline"
+                  className="text-[#008060] hover:text-[#006e52] underline"
                 >
                   contactarnos
                 </a>
