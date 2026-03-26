@@ -3,7 +3,7 @@ FROM node:20 AS build
 WORKDIR /app
 
 COPY package.json ./
-RUN npm install --ignore-scripts --legacy-peer-deps
+RUN npm install --ignore-scripts --legacy-peer-deps && npm install sharp
 
 COPY . .
 RUN npx prisma generate
@@ -17,13 +17,13 @@ RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 COPY --from=build /app/.next/standalone ./
-RUN npm install sharp
 COPY --from=build /app/.next/static ./.next/static
 COPY --from=build /app/public ./public
 COPY --from=build /app/prisma ./prisma
 COPY --from=build /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=build /app/node_modules/@prisma ./node_modules/@prisma
 COPY --from=build /app/node_modules/prisma ./node_modules/prisma
+COPY --from=build /app/node_modules/sharp ./node_modules/sharp
 
 COPY entrypoint.sh ./
 RUN chmod +x entrypoint.sh
