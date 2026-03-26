@@ -90,12 +90,11 @@ function LoginContent() {
                 <label className="block text-sm font-medium text-gray-700">
                   Contraseña
                 </label>
-                <Link
-                  href="/auth/recuperar"
-                  className="text-xs text-brand-orange hover:text-brand-orange-deep"
+                <span
+                  className="text-xs text-gray-400 cursor-default"
                 >
                   ¿Olvidaste tu contraseña?
-                </Link>
+                </span>
               </div>
               <div className="relative">
                 <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />

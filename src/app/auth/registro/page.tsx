@@ -211,7 +211,7 @@ export default function RegistroPage() {
               <span className="text-sm text-gray-600">
                 Acepto los{' '}
                 <Link
-                  href="/aviso-legal"
+                  href="/terminos"
                   className="text-brand-orange hover:underline"
                 >
                   términos y condiciones
