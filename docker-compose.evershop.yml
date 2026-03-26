@@ -31,6 +31,7 @@ services:
       - ./extensions:/app/extensions
       - ./import-products.cjs:/app/import-products.cjs
       - ./setup-spain.cjs:/app/setup-spain.cjs
+      - ./setup-homepage.cjs:/app/setup-homepage.cjs
       - ./ProductosPropios.csv:/app/ProductosPropios.csv
       - ./public/logo.png:/app/media/logo.png
       - evershop-media:/app/media
