@@ -313,7 +313,7 @@ model Invoice {
 
 model SupplierSync {
   id                  String     @id @default(cuid())
-  supplierName        String
+  supplierName        String     @unique
   syncType            SyncType
   endpoint            String
   credentials         String?
