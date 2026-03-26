@@ -1,0 +1,347 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  CUSTOMER
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PAID
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  REDSYS
+  SEQURA
+  TRANSFER
+}
+
+enum PricingType {
+  PERCENTAGE
+  FIXED
+}
+
+enum PricingTarget {
+  CATEGORY
+  MANUFACTURER
+  PRODUCT
+  GLOBAL
+}
+
+enum SyncType {
+  CSV_URL
+  API
+  FTP
+}
+
+enum SyncStatus {
+  SUCCESS
+  PARTIAL
+  FAILED
+  RUNNING
+}
+
+model User {
+  id                     String    @id @default(cuid())
+  email                  String    @unique
+  passwordHash           String
+  name                   String
+  phone                  String?
+  role                   Role      @default(CUSTOMER)
+  nif                    String?
+  isRecargoEquivalencia  Boolean   @default(false)
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+
+  addresses Address[]
+  orders    Order[]
+  cart      Cart?
+  pcBuilds  PcBuild[]
+
+  @@map("users")
+}
+
+model Address {
+  id         String  @id @default(cuid())
+  userId     String
+  street     String
+  city       String
+  province   String
+  postalCode String
+  country    String  @default("ES")
+  isDefault  Boolean @default(false)
+  isBilling  Boolean @default(false)
+
+  user           User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shippingOrders Order[] @relation("ShippingAddress")
+  billingOrders  Order[] @relation("BillingAddress")
+
+  @@map("addresses")
+}
+
+model Category {
+  id          String     @id @default(cuid())
+  externalId  Int?       @unique
+  name        String
+  slug        String     @unique
+  description String?
+  image       String?
+  parentId    String?
+  sortOrder   Int        @default(0)
+
+  parent   Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+  children Category[] @relation("CategoryTree")
+  products Product[]
+
+  @@map("categories")
+}
+
+model Manufacturer {
+  id         String  @id @default(cuid())
+  externalId Int?    @unique
+  name       String
+  slug       String  @unique
+  logo       String?
+  website    String?
+
+  products Product[]
+
+  @@map("manufacturers")
+}
+
+model Product {
+  id             String       @id @default(cuid())
+  sku            String       @unique
+  partNumber     String?
+  ean            String?
+  name           String
+  slug           String       @unique
+  summary        String?      @db.Text
+  description    String?      @db.Text
+  specs          String?      @db.Text
+  generalInfo    String?      @db.Text
+  accessories    String?      @db.Text
+  weight         Decimal      @default(0) @db.Decimal(10, 3)
+  costPrice      Decimal      @db.Decimal(10, 2)
+  salePrice      Decimal      @db.Decimal(10, 2)
+  canonDigital   Decimal      @default(0) @db.Decimal(10, 2)
+  isOffer        Boolean      @default(false)
+  offerStart     DateTime?
+  offerEnd       DateTime?
+  stock          Int          @default(0)
+  stockUpdatedAt DateTime?
+  image          String?
+  categoryId     String?
+  manufacturerId String?
+  isActive       Boolean      @default(true)
+  componentType  String?
+  socketType     String?
+  ramType        String?
+  formFactor     String?
+  wattage        Int?
+  storageInterface String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  category     Category?     @relation(fields: [categoryId], references: [id])
+  manufacturer Manufacturer? @relation(fields: [manufacturerId], references: [id])
+  orderItems   OrderItem[]
+
+  @@index([categoryId])
+  @@index([manufacturerId])
+  @@index([isActive, stock])
+  @@index([slug])
+  @@map("products")
+}
+
+model PricingRule {
+  id        String        @id @default(cuid())
+  name      String
+  type      PricingType
+  value     Decimal       @db.Decimal(10, 2)
+  appliesTo PricingTarget
+  targetId  String?
+  priority  Int           @default(0)
+  isActive  Boolean       @default(true)
+  createdAt DateTime      @default(now())
+
+  @@map("pricing_rules")
+}
+
+model Order {
+  id                      String        @id @default(cuid())
+  orderNumber             String        @unique
+  userId                  String
+  status                  OrderStatus   @default(PENDING)
+  subtotal                Decimal       @db.Decimal(10, 2)
+  canonDigitalTotal       Decimal       @default(0) @db.Decimal(10, 2)
+  ivaTotal                Decimal       @db.Decimal(10, 2)
+  recargoEquivalenciaTotal Decimal      @default(0) @db.Decimal(10, 2)
+  shippingCost            Decimal       @default(0) @db.Decimal(10, 2)
+  total                   Decimal       @db.Decimal(10, 2)
+  paymentMethod           PaymentMethod?
+  paymentReference        String?
+  shippingTrackingCode    String?
+  shippingAddressId       String?
+  billingAddressId        String?
+  notes                   String?       @db.Text
+  createdAt               DateTime      @default(now())
+  updatedAt               DateTime      @updatedAt
+
+  user            User       @relation(fields: [userId], references: [id])
+  shippingAddress Address?   @relation("ShippingAddress", fields: [shippingAddressId], references: [id])
+  billingAddress  Address?   @relation("BillingAddress", fields: [billingAddressId], references: [id])
+  items           OrderItem[]
+  invoice         Invoice?
+
+  @@index([userId])
+  @@index([status])
+  @@map("orders")
+}
+
+model OrderItem {
+  id           String  @id @default(cuid())
+  orderId      String
+  productId    String
+  quantity     Int
+  unitPrice    Decimal @db.Decimal(10, 2)
+  canonDigital Decimal @default(0) @db.Decimal(10, 2)
+  totalPrice   Decimal @db.Decimal(10, 2)
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@map("order_items")
+}
+
+model Cart {
+  id        String   @id @default(cuid())
+  userId    String?  @unique
+  sessionId String?  @unique
+  items     Json     @default("[]")
+  updatedAt DateTime @updatedAt
+
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("carts")
+}
+
+model PcBuild {
+  id         String   @id @default(cuid())
+  userId     String?
+  name       String   @default("Mi PC")
+  components Json     @default("[]")
+  totalPrice Decimal  @default(0) @db.Decimal(10, 2)
+  isPublic   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@map("pc_builds")
+}
+
+model ComponentType {
+  id               String              @id @default(cuid())
+  name             String              @unique
+  slug             String              @unique
+  sortOrder        Int                 @default(0)
+  isRequired       Boolean             @default(true)
+  compatibilityRules CompatibilityRule[]
+
+  @@map("component_types")
+}
+
+model CompatibilityRule {
+  id              String @id @default(cuid())
+  componentTypeId String
+  ruleType        String
+  ruleData        Json
+  description     String?
+
+  componentType ComponentType @relation(fields: [componentTypeId], references: [id], onDelete: Cascade)
+
+  @@map("compatibility_rules")
+}
+
+model Newsletter {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  isSubscribed Boolean  @default(true)
+  createdAt    DateTime @default(now())
+
+  @@map("newsletters")
+}
+
+model ShippingRate {
+  id        String  @id @default(cuid())
+  name      String
+  minWeight Decimal? @db.Decimal(10, 3)
+  maxWeight Decimal? @db.Decimal(10, 3)
+  minPrice  Decimal? @db.Decimal(10, 2)
+  maxPrice  Decimal? @db.Decimal(10, 2)
+  cost      Decimal  @db.Decimal(10, 2)
+  provider  String   @default("GLS")
+  isActive  Boolean  @default(true)
+
+  @@map("shipping_rates")
+}
+
+model Invoice {
+  id                String   @id @default(cuid())
+  orderId           String   @unique
+  invoiceNumber     String   @unique
+  issuedAt          DateTime @default(now())
+  pdfUrl            String?
+  syncedWithBilling Boolean  @default(false)
+
+  order Order @relation(fields: [orderId], references: [id])
+
+  @@map("invoices")
+}
+
+model SupplierSync {
+  id                  String     @id @default(cuid())
+  supplierName        String
+  syncType            SyncType
+  endpoint            String
+  credentials         String?
+  lastSyncAt          DateTime?
+  lastSyncStatus      SyncStatus?
+  syncIntervalMinutes Int        @default(360)
+  fieldMapping        Json       @default("{}")
+  isActive            Boolean    @default(true)
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+
+  logs SyncLog[]
+
+  @@map("supplier_syncs")
+}
+
+model SyncLog {
+  id                  String     @id @default(cuid())
+  supplierSyncId      String
+  startedAt           DateTime   @default(now())
+  completedAt         DateTime?
+  status              SyncStatus @default(RUNNING)
+  productsCreated     Int        @default(0)
+  productsUpdated     Int        @default(0)
+  productsDeactivated Int        @default(0)
+  errors              Json       @default("[]")
+
+  supplierSync SupplierSync @relation(fields: [supplierSyncId], references: [id], onDelete: Cascade)
+
+  @@map("sync_logs")
+}
