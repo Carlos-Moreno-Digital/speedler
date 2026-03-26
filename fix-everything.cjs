@@ -25,16 +25,17 @@ async function fix() {
         if (!sku || !nombre) continue;
 
         // Update product_description where name equals SKU
+        const desc = resumen || '';
         const res = await client.query(`
           UPDATE product_description pd SET
             name = $1,
-            short_description = COALESCE(NULLIF(pd.short_description, ''), $3),
+            short_description = CASE WHEN pd.short_description IS NULL OR pd.short_description = '' THEN $3 ELSE pd.short_description END,
             meta_title = $1
           FROM product p
           WHERE p.product_id = pd.product_description_product_id
             AND p.sku = $2
             AND (pd.name = $2 OR pd.name = '' OR pd.name IS NULL)
-        `, [nombre, sku, resumen || null]);
+        `, [nombre, sku, desc]);
         if (res.rowCount > 0) fixed++;
       }
       console.log(`   Fixed ${fixed} product names`);
