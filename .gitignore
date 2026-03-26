@@ -43,6 +43,9 @@ prisma/*.db
 # docker
 postgres-data/
 
+# SSL certs
+nginx/ssl/
+
 # IDE
 .idea/
 .vscode/
