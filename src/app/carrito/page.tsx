@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useCart } from '@/hooks/useCart';
 import { formatPrice } from '@/lib/utils';
 import { FiTrash2, FiMinus, FiPlus, FiShoppingBag, FiArrowLeft } from 'react-icons/fi';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 
 export default function CarritoPage() {
   const {
@@ -22,24 +24,33 @@ export default function CarritoPage() {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-bg">
-        <div className="container-custom py-16 text-center">
-          <FiShoppingBag className="w-20 h-20 mx-auto text-gray-300 mb-6" />
-          <h1 className="text-2xl font-bold text-brand-brown-dark mb-3">
-            Tu carrito está vacío
-          </h1>
-          <p className="text-gray-500 mb-8">
-            Añade productos desde nuestra tienda para empezar tu compra.
-          </p>
-          <Link href="/tienda" className="btn-primary">
-            Ir a la tienda
-          </Link>
-        </div>
-      </div>
+      <>
+        <Header />
+        <main>
+          <div className="min-h-screen bg-bg">
+            <div className="container-custom py-16 text-center">
+              <FiShoppingBag className="w-20 h-20 mx-auto text-gray-300 mb-6" />
+              <h1 className="text-2xl font-bold text-brand-brown-dark mb-3">
+                Tu carrito está vacío
+              </h1>
+              <p className="text-gray-500 mb-8">
+                Añade productos desde nuestra tienda para empezar tu compra.
+              </p>
+              <Link href="/tienda" className="btn-primary">
+                Ir a la tienda
+              </Link>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </>
     );
   }
 
   return (
+    <>
+    <Header />
+    <main>
     <div className="min-h-screen bg-bg">
       <div className="container-custom py-8">
         <div className="flex items-center justify-between mb-8">
@@ -222,5 +233,8 @@ export default function CarritoPage() {
         </div>
       </div>
     </div>
+    </main>
+    <Footer />
+    </>
   );
 }

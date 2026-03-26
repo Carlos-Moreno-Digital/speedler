@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import prisma from '@/lib/prisma';
 import ShopContent from './ShopContent';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: 'Tienda',
@@ -130,15 +132,21 @@ export default async function TiendaPage({
   ]);
 
   return (
-    <ShopContent
-      products={data.products}
-      total={data.total}
-      page={data.page}
-      pageSize={data.pageSize}
-      totalPages={data.totalPages}
-      categories={categories}
-      manufacturers={manufacturers}
-      currentFilters={searchParams as Record<string, string | undefined>}
-    />
+    <>
+      <Header />
+      <main>
+        <ShopContent
+          products={data.products}
+          total={data.total}
+          page={data.page}
+          pageSize={data.pageSize}
+          totalPages={data.totalPages}
+          categories={categories}
+          manufacturers={manufacturers}
+          currentFilters={searchParams as Record<string, string | undefined>}
+        />
+      </main>
+      <Footer />
+    </>
   );
 }

@@ -2,6 +2,8 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import prisma from '@/lib/prisma';
 import ProductDetail from './ProductDetail';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 
 interface PageProps {
   params: { slug: string };
@@ -90,5 +92,13 @@ export default async function ProductPage({ params }: PageProps) {
     product.id
   );
 
-  return <ProductDetail product={product} relatedProducts={related} />;
+  return (
+    <>
+      <Header />
+      <main>
+        <ProductDetail product={product} relatedProducts={related} />
+      </main>
+      <Footer />
+    </>
+  );
 }

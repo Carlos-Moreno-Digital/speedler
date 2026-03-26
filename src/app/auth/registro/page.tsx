@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { FiUser, FiMail, FiLock, FiPhone, FiFileText, FiUserPlus } from 'react-icons/fi';
+import Header from '@/components/layout/Header';
 
 export default function RegistroPage() {
   const router = useRouter();
@@ -74,6 +75,9 @@ export default function RegistroPage() {
   }
 
   return (
+    <>
+    <Header />
+    <main>
     <div className="min-h-screen bg-bg flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
@@ -246,5 +250,7 @@ export default function RegistroPage() {
         </div>
       </div>
     </div>
+    </main>
+    </>
   );
 }

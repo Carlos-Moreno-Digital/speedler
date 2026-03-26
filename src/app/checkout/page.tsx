@@ -7,6 +7,8 @@ import { formatPrice } from '@/lib/utils';
 import type { CheckoutData } from '@/types';
 import toast from 'react-hot-toast';
 import { FiCheck, FiChevronRight } from 'react-icons/fi';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 
 const STEPS = [
   'Dirección de envío',
@@ -125,16 +127,22 @@ export default function CheckoutPage() {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-bg">
-        <div className="container-custom py-16 text-center">
-          <h1 className="text-2xl font-bold text-brand-brown-dark mb-4">
-            No hay productos en el carrito
-          </h1>
-          <a href="/tienda" className="btn-primary">
-            Ir a la tienda
-          </a>
-        </div>
-      </div>
+      <>
+        <Header />
+        <main>
+          <div className="min-h-screen bg-bg">
+            <div className="container-custom py-16 text-center">
+              <h1 className="text-2xl font-bold text-brand-brown-dark mb-4">
+                No hay productos en el carrito
+              </h1>
+              <a href="/tienda" className="btn-primary">
+                Ir a la tienda
+              </a>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </>
     );
   }
 
@@ -214,6 +222,9 @@ export default function CheckoutPage() {
   );
 
   return (
+    <>
+    <Header />
+    <main>
     <div className="min-h-screen bg-bg">
       <div className="container-custom py-8">
         <h1 className="text-3xl font-bold text-brand-brown-dark mb-8">
@@ -574,5 +585,8 @@ export default function CheckoutPage() {
         </div>
       </div>
     </div>
+    </main>
+    <Footer />
+    </>
   );
 }

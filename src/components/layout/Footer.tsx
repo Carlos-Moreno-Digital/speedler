@@ -21,7 +21,7 @@ const footerLinks = {
   ],
   shop: [
     { label: 'Tienda', href: '/tienda' },
-    { label: 'Configurador PC', href: '/configurador' },
+    { label: 'Configurador PC', href: '/configurador-pc' },
     { label: 'Ofertas', href: '/tienda?offers=true' },
     { label: 'Novedades', href: '/tienda?sortBy=newest' },
   ],
@@ -74,9 +74,16 @@ export default function Footer({ className }: FooterProps) {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
-  const handleNewsletter = (e: React.FormEvent) => {
+  const handleNewsletter = async (e: React.FormEvent) => {
     e.preventDefault();
     if (email.trim()) {
+      try {
+        await fetch('/api/newsletter', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+      } catch {}
       setSubscribed(true);
       setEmail('');
       setTimeout(() => setSubscribed(false), 5000);

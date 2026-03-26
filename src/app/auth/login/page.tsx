@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { FiMail, FiLock, FiLogIn } from 'react-icons/fi';
+import Header from '@/components/layout/Header';
 
 function LoginContent() {
   const router = useRouter();
@@ -139,8 +140,13 @@ function LoginContent() {
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-bg flex items-center justify-center"><p>Cargando...</p></div>}>
-      <LoginContent />
-    </Suspense>
+    <>
+      <Header />
+      <main>
+        <Suspense fallback={<div className="min-h-screen bg-bg flex items-center justify-center"><p>Cargando...</p></div>}>
+          <LoginContent />
+        </Suspense>
+      </main>
+    </>
   );
 }
