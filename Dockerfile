@@ -3,7 +3,7 @@ FROM node:20 AS build
 WORKDIR /app
 
 COPY package.json ./
-RUN npm install --ignore-scripts
+RUN npm install --ignore-scripts --legacy-peer-deps
 
 COPY . .
 RUN npx prisma generate
