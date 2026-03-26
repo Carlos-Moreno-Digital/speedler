@@ -7,26 +7,7 @@
       "user": "postgres",
       "password": "postgres"
     },
-    "extensions": [
-      {
-        "name": "redsys",
-        "resolve": "extensions/redsys",
-        "enabled": true,
-        "priority": 10
-      },
-      {
-        "name": "sequra",
-        "resolve": "extensions/sequra",
-        "enabled": true,
-        "priority": 11
-      },
-      {
-        "name": "supplier_sync",
-        "resolve": "extensions/supplier-sync",
-        "enabled": true,
-        "priority": 20
-      }
-    ],
+    "extensions": [],
     "redsys": {
       "status": false,
       "merchantCode": "",
