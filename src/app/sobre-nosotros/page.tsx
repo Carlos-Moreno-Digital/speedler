@@ -54,7 +54,7 @@ export default function SobreNosotrosPage() {
                 actualizar su setup actual.
               </p>
             </div>
-            <div className="bg-gradient-to-br from-brand-orange/10 to-brand-cream rounded-2xl p-10 flex items-center justify-center">
+            <div className="bg-gradient-to-br from-[#008060]/10 to-gray-50 rounded-2xl p-10 flex items-center justify-center">
               <div className="text-center">
                 <div className="text-6xl font-bold text-[#008060] mb-2">S</div>
                 <div className="text-2xl font-bold text-[#3a3a3a]">
