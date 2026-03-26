@@ -1,21 +1,19 @@
-FROM node:20-alpine AS base
-
-RUN apk add --no-cache libc6-compat openssl python3 make g++
+FROM node:20 AS build
 
 WORKDIR /app
 
-COPY package.json package-lock.json* ./
-RUN npm install --legacy-peer-deps 2>&1 || (cat /root/.npm/_logs/*.log && exit 1)
+COPY package.json ./
+RUN npm install
 
 COPY . .
-
 RUN npx prisma generate
-
-FROM base AS build
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
-FROM node:20-alpine AS production
+FROM node:20-slim AS production
+
+RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 COPY --from=build /app/.next/standalone ./
