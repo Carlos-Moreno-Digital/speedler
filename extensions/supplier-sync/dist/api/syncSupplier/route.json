@@ -1,0 +1,6 @@
+{
+  "methods": ["POST"],
+  "path": "/admin/api/supplier-sync/trigger",
+  "access": "private",
+  "description": "Manually trigger supplier sync for one or all suppliers"
+}
