@@ -34,7 +34,7 @@ export default function AdminOrdersPage() {
 
     const res = await fetch(`/api/orders?${params}`);
     const data = await res.json();
-    setOrders(data.data || []);
+    setOrders(data.orders || []);
     setLoading(false);
   }
 
