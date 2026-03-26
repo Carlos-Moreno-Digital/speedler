@@ -25,6 +25,9 @@ COPY --from=build /app/node_modules/@prisma ./node_modules/@prisma
 COPY --from=build /app/node_modules/prisma ./node_modules/prisma
 COPY --from=build /app/node_modules/sharp ./node_modules/sharp
 COPY --from=build /app/node_modules/@img ./node_modules/@img
+COPY --from=build /app/node_modules/bcryptjs ./node_modules/bcryptjs
+COPY --from=build /app/ProductosPropios.csv ./ProductosPropios.csv
+COPY --from=build /app/seed.js ./seed.js
 
 COPY entrypoint.sh ./
 RUN chmod +x entrypoint.sh
