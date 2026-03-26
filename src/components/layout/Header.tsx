@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { FiSearch, FiShoppingCart, FiUser, FiMenu } from 'react-icons/fi';
+import { FiSearch, FiShoppingCart, FiUser, FiMenu, FiX } from 'react-icons/fi';
 import MobileMenu from './MobileMenu';
 
 interface HeaderProps {
@@ -17,6 +17,7 @@ export default function Header({ cartItemCount = 0, user = null }: HeaderProps) 
   const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchOpen, setSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
@@ -31,6 +32,7 @@ export default function Header({ cartItemCount = 0, user = null }: HeaderProps) 
     if (searchQuery.trim()) {
       router.push(`/tienda?search=${encodeURIComponent(searchQuery.trim())}`);
       setSearchQuery('');
+      setSearchOpen(false);
     }
   };
 
@@ -44,89 +46,67 @@ export default function Header({ cartItemCount = 0, user = null }: HeaderProps) 
     <>
       <header
         className={cn(
-          'sticky top-0 z-40 w-full border-b bg-white transition-shadow duration-300',
-          scrolled ? 'border-gray-200 shadow-md' : 'border-transparent',
+          'sticky top-0 z-40 w-full bg-white transition-shadow duration-300',
+          scrolled ? 'shadow-sm' : '',
         )}
+        style={{ borderBottom: '1px solid #ebebeb' }}
       >
-        <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
-          {/* Mobile hamburger */}
-          <button
-            onClick={() => setMobileMenuOpen(true)}
-            className="rounded-lg p-2 text-brand-brown-dark transition-colors hover:bg-brand-cream lg:hidden"
-            aria-label="Abrir men&uacute;"
-          >
-            <FiMenu className="h-5 w-5" />
-          </button>
+        <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-6 lg:px-12">
+          {/* LEFT: Mobile hamburger + Logo */}
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className="p-1 transition-colors lg:hidden"
+              style={{ color: '#3a3a3a' }}
+              aria-label="Abrir menú"
+            >
+              <FiMenu className="h-5 w-5" />
+            </button>
 
-          {/* Logo */}
-          <Link href="/" className="flex-shrink-0">
-            <Image
-              src="/logo.png"
-              alt="Speedler"
-              width={140}
-              height={40}
-              className="h-9 w-auto"
-              priority
-            />
-          </Link>
+            <Link href="/" className="flex-shrink-0">
+              <Image
+                src="/logo.png"
+                alt="Speedler"
+                width={140}
+                height={40}
+                className="h-9 w-auto"
+                priority
+              />
+            </Link>
+          </div>
 
-          {/* Desktop nav */}
-          <nav className="hidden items-center gap-1 lg:flex">
+          {/* CENTER: Desktop navigation */}
+          <nav className="hidden items-center gap-6 lg:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-brand-brown-dark transition-colors hover:bg-brand-cream hover:text-brand-orange-deep"
+                className="text-sm font-medium transition-colors hover:text-[#008060]"
+                style={{ color: '#3a3a3a' }}
               >
                 {link.label}
               </Link>
             ))}
           </nav>
 
-          {/* Search bar */}
-          <form onSubmit={handleSearch} className="mx-4 hidden flex-1 md:block">
-            <div className="relative max-w-lg">
-              <FiSearch className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Buscar productos..."
-                className="w-full rounded-full border border-gray-300 bg-bg-alt py-2 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-400 transition-colors focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/30"
-              />
-            </div>
-          </form>
-
-          {/* Right actions */}
-          <div className="flex items-center gap-2">
-            {/* Mobile search */}
-            <Link
-              href="/tienda"
-              className="rounded-lg p-2 text-brand-brown-dark transition-colors hover:bg-brand-cream md:hidden"
+          {/* RIGHT: Icons */}
+          <div className="flex items-center gap-3">
+            {/* Search toggle */}
+            <button
+              onClick={() => setSearchOpen(!searchOpen)}
+              className="p-1 transition-colors hover:text-[#008060]"
+              style={{ color: '#3a3a3a' }}
               aria-label="Buscar"
             >
-              <FiSearch className="h-5 w-5" />
-            </Link>
-
-            {/* Cart */}
-            <Link
-              href="/carrito"
-              className="relative rounded-lg p-2 text-brand-brown-dark transition-colors hover:bg-brand-cream"
-              aria-label="Carrito de compras"
-            >
-              <FiShoppingCart className="h-5 w-5" />
-              {cartItemCount > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-brand-orange text-[10px] font-bold text-white">
-                  {cartItemCount > 99 ? '99+' : cartItemCount}
-                </span>
-              )}
-            </Link>
+              {searchOpen ? <FiX className="h-5 w-5" /> : <FiSearch className="h-5 w-5" />}
+            </button>
 
             {/* User menu */}
             <div className="relative">
               <button
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
-                className="rounded-lg p-2 text-brand-brown-dark transition-colors hover:bg-brand-cream"
+                className="p-1 transition-colors hover:text-[#008060]"
+                style={{ color: '#3a3a3a' }}
                 aria-label="Cuenta de usuario"
               >
                 <FiUser className="h-5 w-5" />
@@ -138,11 +118,11 @@ export default function Header({ cartItemCount = 0, user = null }: HeaderProps) 
                     className="fixed inset-0 z-10"
                     onClick={() => setUserMenuOpen(false)}
                   />
-                  <div className="absolute right-0 z-20 mt-2 w-48 rounded-xl border border-gray-200 bg-white py-1 shadow-lg">
+                  <div className="absolute right-0 z-20 mt-2 w-48 rounded-lg bg-white py-1 shadow-lg" style={{ border: '1px solid #ebebeb' }}>
                     {user ? (
                       <>
-                        <div className="border-b border-gray-100 px-4 py-2">
-                          <p className="text-sm font-medium text-brand-brown-dark">
+                        <div className="px-4 py-2" style={{ borderBottom: '1px solid #ebebeb' }}>
+                          <p className="text-sm font-medium" style={{ color: '#3a3a3a' }}>
                             {user.name}
                           </p>
                           <p className="text-xs text-gray-500">{user.email}</p>
@@ -150,23 +130,23 @@ export default function Header({ cartItemCount = 0, user = null }: HeaderProps) 
                         <Link
                           href="/cuenta"
                           onClick={() => setUserMenuOpen(false)}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-cream"
+                          className="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50 hover:text-[#008060]"
                         >
                           Mi cuenta
                         </Link>
                         <Link
                           href="/cuenta/pedidos"
                           onClick={() => setUserMenuOpen(false)}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-cream"
+                          className="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50 hover:text-[#008060]"
                         >
                           Mis pedidos
                         </Link>
                         <Link
                           href="/api/auth/signout"
                           onClick={() => setUserMenuOpen(false)}
-                          className="block px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                          className="block px-4 py-2 text-sm text-red-600 transition-colors hover:bg-red-50"
                         >
-                          Cerrar sesi&oacute;n
+                          Cerrar sesión
                         </Link>
                       </>
                     ) : (
@@ -174,14 +154,14 @@ export default function Header({ cartItemCount = 0, user = null }: HeaderProps) 
                         <Link
                           href="/auth/login"
                           onClick={() => setUserMenuOpen(false)}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-cream"
+                          className="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50 hover:text-[#008060]"
                         >
-                          Iniciar sesi&oacute;n
+                          Iniciar sesión
                         </Link>
                         <Link
                           href="/auth/registro"
                           onClick={() => setUserMenuOpen(false)}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-cream"
+                          className="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50 hover:text-[#008060]"
                         >
                           Registrarse
                         </Link>
@@ -191,6 +171,45 @@ export default function Header({ cartItemCount = 0, user = null }: HeaderProps) 
                 </>
               )}
             </div>
+
+            {/* Cart */}
+            <Link
+              href="/carrito"
+              className="relative p-1 transition-colors hover:text-[#008060]"
+              style={{ color: '#3a3a3a' }}
+              aria-label="Carrito de compras"
+            >
+              <FiShoppingCart className="h-5 w-5" />
+              {cartItemCount > 0 && (
+                <span className="absolute -right-1.5 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#008060] text-[10px] font-bold text-white">
+                  {cartItemCount > 99 ? '99+' : cartItemCount}
+                </span>
+              )}
+            </Link>
+          </div>
+        </div>
+
+        {/* Search bar - slides down when open */}
+        <div
+          className={cn(
+            'overflow-hidden transition-all duration-200',
+            searchOpen ? 'max-h-16' : 'max-h-0',
+          )}
+          style={{ borderTop: searchOpen ? '1px solid #ebebeb' : 'none' }}
+        >
+          <div className="mx-auto max-w-[1200px] px-6 py-3 lg:px-12">
+            <form onSubmit={handleSearch} className="relative">
+              <FiSearch className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Buscar productos..."
+                autoFocus={searchOpen}
+                className="w-full rounded-md py-2 pl-10 pr-4 text-sm placeholder-gray-400 transition-colors focus:outline-none"
+                style={{ border: '1px solid #ebebeb', color: '#3a3a3a' }}
+              />
+            </form>
           </div>
         </div>
       </header>

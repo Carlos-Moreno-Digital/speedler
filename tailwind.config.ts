@@ -9,19 +9,43 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        brand: {
-          cream: '#F5DEB3',
-          peach: '#EDBA7A',
-          'orange-light': '#E8A54B',
-          orange: '#E88B2D',
-          'orange-deep': '#D4691A',
-          'brown-dark': '#5B2C0E',
-          'brown-medium': '#7A3D12',
+        primary: {
+          DEFAULT: '#008060',
+          hover: '#006e52',
+        },
+        interactive: '#003d7c',
+        critical: '#d72c0d',
+        sale: '#e53e3e',
+        text: {
+          DEFAULT: '#3a3a3a',
+          subdued: '#777777',
+        },
+        divider: '#ebebeb',
+        surface: {
+          DEFAULT: '#ffffff',
+          subdued: '#fafbfb',
         },
         bg: {
-          DEFAULT: '#FAFAF8',
-          alt: '#F5F0EB',
+          DEFAULT: '#ffffff',
+          alt: '#fafbfb',
         },
+        // Backwards compat aliases
+        brand: {
+          cream: '#fafbfb',
+          peach: '#008060',
+          'orange-light': '#008060',
+          orange: '#008060',
+          'orange-deep': '#006e52',
+          'brown-dark': '#3a3a3a',
+          'brown-medium': '#777777',
+        },
+      },
+      borderRadius: {
+        btn: '3px',
+        card: '6px',
+      },
+      maxWidth: {
+        'page-width': '1200px',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],

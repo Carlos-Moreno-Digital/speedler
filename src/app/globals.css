@@ -3,42 +3,73 @@
 @tailwind utilities;
 
 :root {
-  --brand-cream: #F5DEB3;
-  --brand-peach: #EDBA7A;
-  --brand-orange-light: #E8A54B;
-  --brand-orange: #E88B2D;
-  --brand-orange-deep: #D4691A;
-  --brand-brown-dark: #5B2C0E;
-  --brand-brown-medium: #7A3D12;
-  --bg: #FAFAF8;
-  --bg-alt: #F5F0EB;
+  --color-primary: #008060;
+  --color-primary-hover: #006e52;
+  --color-interactive: #003d7c;
+  --color-critical: #d72c0d;
+  --color-sale: #e53e3e;
+  --color-text: #3a3a3a;
+  --color-text-subdued: #777777;
+  --color-divider: #ebebeb;
+  --color-surface: #ffffff;
+  --color-surface-subdued: #fafbfb;
+  --bg: #ffffff;
+  --bg-alt: #fafbfb;
+  /* Backwards compat aliases */
+  --brand-cream: #fafbfb;
+  --brand-peach: #008060;
+  --brand-orange-light: #008060;
+  --brand-orange: #008060;
+  --brand-orange-deep: #006e52;
+  --brand-brown-dark: #3a3a3a;
+  --brand-brown-medium: #777777;
 }
 
 @layer base {
   body {
-    @apply bg-bg text-gray-800 antialiased;
+    @apply bg-white antialiased;
+    color: var(--color-text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading text-brand-brown-dark;
+    @apply font-heading;
+    color: var(--color-text);
   }
 }
 
 @layer components {
   .btn-primary {
     @apply inline-flex items-center justify-center px-6 py-3
-           bg-brand-orange text-white font-semibold rounded-lg
-           hover:bg-brand-orange-deep transition-colors duration-200
-           focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2
+           text-white transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-offset-2
            disabled:opacity-50 disabled:cursor-not-allowed;
+    background-color: var(--color-primary);
+    font-weight: 600;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.05), inset 0 -1px 0 rgba(0,0,0,0.2);
+  }
+  .btn-primary:hover {
+    background-color: var(--color-primary-hover);
+  }
+  .btn-primary:focus {
+    --tw-ring-color: var(--color-primary);
   }
 
   .btn-secondary {
     @apply inline-flex items-center justify-center px-6 py-3
-           bg-white text-brand-brown-dark font-semibold rounded-lg
-           border-2 border-brand-orange hover:bg-brand-cream
-           transition-colors duration-200
-           focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2;
+           bg-white transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-offset-2;
+    color: var(--color-text);
+    font-weight: 600;
+    border-radius: 3px;
+    border: 1px solid rgba(201,204,207,1);
+  }
+  .btn-secondary:hover {
+    background-color: var(--color-surface-subdued);
+  }
+  .btn-secondary:focus {
+    --tw-ring-color: var(--color-primary);
   }
 
   .btn-sm {
@@ -46,44 +77,59 @@
   }
 
   .input-field {
-    @apply w-full px-4 py-3 border border-gray-300 rounded-lg
-           focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent
+    @apply w-full px-4 py-3 border rounded-md
+           focus:outline-none focus:ring-2 focus:border-transparent
            placeholder:text-gray-400 transition-colors;
+    border-color: var(--color-divider);
+  }
+  .input-field:focus {
+    --tw-ring-color: var(--color-primary);
   }
 
   .card {
-    @apply bg-white rounded-xl shadow-sm border border-gray-100
-           hover:shadow-md transition-shadow duration-200;
+    @apply bg-white hover:shadow-md transition-shadow duration-200;
+    border-radius: 6px;
+    border: 1px solid var(--color-divider);
   }
 
   .badge {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full
+    @apply inline-flex items-center px-2.5 py-0.5
            text-xs font-medium;
+    border-radius: 3px;
   }
 
+  .badge-primary {
+    background-color: #e0f5ef;
+    color: var(--color-primary);
+  }
+
+  /* Backwards compat alias */
   .badge-orange {
-    @apply badge bg-brand-cream text-brand-brown-dark;
+    background-color: #e0f5ef;
+    color: var(--color-primary);
   }
 
   .badge-green {
-    @apply badge bg-green-100 text-green-800;
+    @apply bg-green-100 text-green-800;
   }
 
   .badge-red {
-    @apply badge bg-red-100 text-red-800;
+    @apply bg-red-100 text-red-800;
   }
 
   .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: 1200px;
   }
 
+  /* gradient-brand replaced with simple primary bg */
   .gradient-brand {
-    background: linear-gradient(135deg, var(--brand-orange-light), var(--brand-orange-deep));
+    background-color: var(--color-primary);
   }
 
   .gradient-text {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, var(--brand-orange), var(--brand-brown-dark));
+    background-image: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
   }
 }
 
@@ -97,11 +143,11 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-brand-peach rounded-full;
+  @apply bg-gray-300 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-brand-orange;
+  @apply bg-gray-400;
 }
 
 /* Animations */
