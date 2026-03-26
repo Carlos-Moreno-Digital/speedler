@@ -14,12 +14,12 @@ export async function GET() {
     const categoryMapping: Record<string, string[]> = {
       cpu: ['Procesadores'],
       motherboard: ['Placas Base'],
-      ram: ['Memorias RAM', 'Memoria RAM'],
-      gpu: ['Tarjetas Gráficas', 'Tarjetas Graficas'],
-      storage: ['Discos Duros', 'Discos SSD', 'SSD', 'Almacenamiento'],
-      psu: ['Fuentes de Alimentación', 'Fuentes Alimentacion'],
-      case: ['Cajas', 'Torres', 'Cajas/Torres'],
-      cooler: ['Ventiladores', 'Refrigeración', 'Refrigeracion'],
+      ram: ['Memorias'],
+      gpu: ['Tarjetas Gráficas / Edición de Video'],
+      storage: ['Discos Duros Internos', 'Discos Duros Externos', 'SSD'],
+      psu: ['Fuentes Alimentación'],
+      case: ['Cajas CPU'],
+      cooler: ['Ventiladores CPU', 'Ventiladores de caja'],
     };
 
     const result = await Promise.all(

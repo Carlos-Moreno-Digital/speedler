@@ -3,32 +3,13 @@ import prisma from '@/lib/prisma';
 
 const CATEGORY_MAP: Record<string, string[]> = {
   procesador: ['Procesadores'],
-  'placa-base': ['Placas Base', 'Placas base'],
-  'memoria-ram': ['Memorias RAM', 'Memoria RAM', 'Memorias'],
-  'tarjeta-grafica': [
-    'Tarjetas Gráficas',
-    'Tarjetas Graficas',
-    'Tarjetas gráficas',
-  ],
-  almacenamiento: [
-    'Discos Duros',
-    'Discos SSD',
-    'SSD',
-    'Almacenamiento',
-    'Discos duros',
-  ],
-  'fuente-alimentacion': [
-    'Fuentes de Alimentación',
-    'Fuentes Alimentacion',
-    'Fuentes de alimentación',
-  ],
-  'caja-torre': ['Cajas', 'Torres', 'Cajas/Torres', 'Cajas y Torres'],
-  refrigeracion: [
-    'Ventiladores',
-    'Refrigeración',
-    'Refrigeracion',
-    'Ventilación',
-  ],
+  'placa-base': ['Placas Base'],
+  'memoria-ram': ['Memorias'],
+  'tarjeta-grafica': ['Tarjetas Gráficas / Edición de Video'],
+  almacenamiento: ['Discos Duros Internos', 'Discos Duros Externos', 'SSD'],
+  'fuente-alimentacion': ['Fuentes Alimentación'],
+  'caja-torre': ['Cajas CPU'],
+  refrigeracion: ['Ventiladores CPU', 'Ventiladores de caja'],
 };
 
 export async function GET(request: NextRequest) {
