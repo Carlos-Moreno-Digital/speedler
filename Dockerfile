@@ -1,9 +1,11 @@
 FROM node:20-alpine AS base
 
+RUN apk add --no-cache libc6-compat openssl python3 make g++
+
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
-RUN npm install --production=false
+RUN npm install --legacy-peer-deps 2>&1 || (cat /root/.npm/_logs/*.log && exit 1)
 
 COPY . .
 
