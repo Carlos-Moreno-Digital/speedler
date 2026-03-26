@@ -1,0 +1,5 @@
+{
+  "method": "GET",
+  "path": "/redsys/return",
+  "access": "public"
+}
