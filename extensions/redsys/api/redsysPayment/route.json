@@ -1,0 +1,5 @@
+{
+  "method": "POST",
+  "path": "/api/redsys/payment",
+  "access": "public"
+}

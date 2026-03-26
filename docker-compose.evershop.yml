@@ -28,6 +28,11 @@ services:
       SUPPRESS_NO_CONFIG_WARNING: "true"
     volumes:
       - ./config:/app/config
+      - ./extensions:/app/extensions
+      - ./import-products.js:/app/import-products.js
+      - ./setup-spain.js:/app/setup-spain.js
+      - ./ProductosPropios.csv:/app/ProductosPropios.csv
+      - ./public/logo.png:/app/media/logo.png
       - evershop-media:/app/media
     depends_on:
       db:

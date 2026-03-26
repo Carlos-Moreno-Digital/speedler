@@ -6,13 +6,66 @@
       "database": "postgres",
       "user": "postgres",
       "password": "postgres"
+    },
+    "extensions": [
+      {
+        "name": "redsys",
+        "resolve": "extensions/redsys",
+        "enabled": true,
+        "priority": 10
+      },
+      {
+        "name": "sequra",
+        "resolve": "extensions/sequra",
+        "enabled": true,
+        "priority": 11
+      },
+      {
+        "name": "supplier_sync",
+        "resolve": "extensions/supplier-sync",
+        "enabled": true,
+        "priority": 20
+      }
+    ],
+    "redsys": {
+      "status": false,
+      "merchantCode": "",
+      "terminal": "1",
+      "secretKey": "",
+      "testMode": true
+    },
+    "sequra": {
+      "status": false,
+      "merchantRef": "",
+      "apiKey": "",
+      "testMode": true
     }
   },
   "shop": {
     "homeUrl": "https://demo2.5tcgroup.com",
+    "title": "Speedler",
+    "description": "Tu tienda de informática de confianza",
     "currency": "EUR",
     "language": "es",
     "weightUnit": "kg",
     "timezone": "Europe/Madrid"
+  },
+  "catalog": {
+    "product": {
+      "image": {
+        "thumbnail": { "width": 300, "height": 300 },
+        "listing": { "width": 500, "height": 500 },
+        "single": { "width": 1200, "height": 1200 }
+      },
+      "showOutOfStockProducts": true
+    }
+  },
+  "checkout": {
+    "allowGuest": true
+  },
+  "tax": {
+    "rounding": "round",
+    "precision": 2,
+    "priceIncludingTax": true
   }
 }
