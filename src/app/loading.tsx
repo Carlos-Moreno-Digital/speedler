@@ -3,11 +3,11 @@ export default function Loading() {
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div
         className="w-12 h-12 rounded-full border-4 border-t-transparent animate-spin"
-        style={{ borderColor: '#E88B2D', borderTopColor: 'transparent' }}
+        style={{ borderColor: '#008060', borderTopColor: 'transparent' }}
       />
       <p
         className="mt-4 text-lg font-medium animate-pulse"
-        style={{ color: '#5B2C0E' }}
+        style={{ color: '#3a3a3a' }}
       >
         Cargando...
       </p>

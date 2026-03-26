@@ -19,7 +19,7 @@ export default function CarritoPage() {
     itemCount,
   } = useCart();
 
-  const shippingEstimate = subtotal >= 50 ? 0 : 5.99;
+  const shippingEstimate = subtotal >= 100 ? 0 : 5.99;
   const grandTotal = Math.round((total + shippingEstimate) * 100) / 100;
 
   if (items.length === 0) {
