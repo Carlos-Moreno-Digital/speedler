@@ -82,7 +82,7 @@ async function setup() {
     // Create Hero Banner widget
     await client.query(`
       INSERT INTO widget (uuid, name, type, settings, sort_order, status, route, area)
-      VALUES ($1, 'Hero Banner', 'text_block', $2, 1, true, 'homepage', 'content')
+      VALUES ($1, 'Hero Banner', 'text_block', $2::jsonb, 1, true, 'homepage', 'content')
       ON CONFLICT DO NOTHING
     `, [
       crypto.randomUUID(),
@@ -96,7 +96,7 @@ async function setup() {
     // Create Featured Products widget
     await client.query(`
       INSERT INTO widget (uuid, name, type, settings, sort_order, status, route, area)
-      VALUES ($1, 'Productos Destacados', 'collection_products', $2, 2, true, 'homepage', 'content')
+      VALUES ($1, 'Productos Destacados', 'collection_products', $2::jsonb, 2, true, 'homepage', 'content')
       ON CONFLICT DO NOTHING
     `, [
       crypto.randomUUID(),
