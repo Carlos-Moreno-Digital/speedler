@@ -1,21 +1,31 @@
 FROM evershop/evershop:latest
 
 # Create directories
-RUN mkdir -p /app/translations/es /app/media/speedler
+RUN mkdir -p /app/translations/es /app/themes/speedler /app/media/speedler
 
 # Copy translations
 COPY translations/es /app/translations/es
 
+# Copy theme with proper structure (src/ + tsconfig + package.json)
+COPY themes/speedler /app/themes/speedler
+
+# Install TypeScript in theme for compilation
+RUN cd /app/themes/speedler && npm install --save-dev typescript 2>/dev/null || true
+
+# Compile theme: TypeScript src/ -> dist/
+RUN cd /app/themes/speedler && npx tsc 2>&1 || true
+
 # Copy logo
 COPY public/logo.png /app/media/speedler/logo.png
 
-# Copy config (WITHOUT theme to avoid build issues)
+# Copy config WITH theme enabled
 COPY config /app/config
 
-# Copy setup scripts
-COPY *.cjs /app/
+# Clean old build and rebuild EverShop with theme
+RUN rm -rf /app/.evershop && npm run build
 
-# Copy CSV
+# Copy setup scripts and CSV (after build, not needed for compilation)
+COPY *.cjs /app/
 COPY ProductosPropios.csv /app/
 
 EXPOSE 3000

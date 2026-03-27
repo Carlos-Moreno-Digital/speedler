@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2018",
+    "jsx": "react",
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "rootDir": "src",
+    "declaration": true,
+    "esModuleInterop": true,
+    "strict": false,
+    "skipLibCheck": true,
+    "paths": {
+      "@components/*": [
+        "./src/components/*",
+        "../../node_modules/@evershop/evershop/dist/components/*"
+      ]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
