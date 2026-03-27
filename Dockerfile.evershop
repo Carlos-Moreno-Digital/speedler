@@ -1,0 +1,25 @@
+FROM evershop/evershop:latest
+
+# Copy translations
+COPY translations/es /app/translations/es
+
+# Copy theme
+COPY themes/speedler /app/themes/speedler
+
+# Copy logo
+COPY public/logo.png /app/media/speedler/logo.png
+
+# Copy config
+COPY config /app/config
+
+# Copy setup scripts
+COPY *.cjs /app/
+
+# Copy CSV
+COPY ProductosPropios.csv /app/
+
+# Rebuild to include theme
+RUN cd /app && npm run build
+
+EXPOSE 3000
+CMD ["npm", "run", "start"]
