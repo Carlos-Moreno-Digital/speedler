@@ -153,6 +153,19 @@ const suppliers = [
 // Helpers
 // ---------------------------------------------------------------------------
 
+/** Slugify a string for URL keys */
+function slugify(text) {
+  return (text || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 80);
+}
+
+/** Parse float safely */
+function parseFloatSafe(val) {
+  if (!val) return 0;
+  const cleaned = String(val).trim().replace(/\./g, '').replace(',', '.');
+  const n = parseFloat(cleaned);
+  return isNaN(n) ? 0 : n;
+}
+
 /** Download CSV from a URL, following redirects. Uses only Node.js built-in modules. */
 function downloadCsv(url) {
   return new Promise((resolve, reject) => {
@@ -458,7 +471,85 @@ async function main() {
             }
 
             if (!matchedProduct) {
-              result.skipped++;
+              // CREATE NEW PRODUCT from supplier data
+              if (!supplierName || !supplierSku) {
+                result.skipped++;
+                continue;
+              }
+              const costPrice = mapping.costPrice ? parseFloatSafe(prod[mapping.costPrice]) : 0;
+              if (costPrice <= 0) {
+                result.skipped++;
+                continue;
+              }
+              const salePrice = Math.round(costPrice * 1.25 * 100) / 100;
+              const urlKey = slugify(supplierName) + '-' + slugify(supplierSku);
+              const supplierCategory = mapping.category ? (prod[mapping.category] || '').trim() : '';
+              const supplierManufacturer = mapping.manufacturer ? (prod[mapping.manufacturer] || '').trim() : '';
+
+              try {
+                // Find or skip category
+                let categoryId = null;
+                if (supplierCategory) {
+                  const catRes = await client.query(
+                    'SELECT c.category_id FROM category c JOIN category_description cd ON cd.category_description_category_id = c.category_id WHERE cd.name = $1 LIMIT 1',
+                    [supplierCategory]
+                  );
+                  if (catRes.rows.length > 0) {
+                    categoryId = catRes.rows[0].category_id;
+                  } else {
+                    // Create category
+                    const newCat = await client.query(
+                      'INSERT INTO category (uuid, status, include_in_nav) VALUES ($1, true, false) RETURNING category_id',
+                      [crypto.randomUUID()]
+                    );
+                    categoryId = newCat.rows[0].category_id;
+                    await client.query(
+                      'INSERT INTO category_description (category_description_category_id, name, url_key, short_description) VALUES ($1, $2, $3, $4)',
+                      [categoryId, supplierCategory, slugify(supplierCategory), '']
+                    );
+                  }
+                }
+
+                // Create product
+                const newProd = await client.query(
+                  `INSERT INTO product (uuid, sku, price, weight, status, visibility, group_id, category_id, part_number, ean)
+                   VALUES ($1, $2, $3, 0, true, true, 1, $4, $5, $6)
+                   RETURNING product_id`,
+                  [crypto.randomUUID(), supplierSku, salePrice, categoryId, supplierPartNumber || null, supplierEan || null]
+                );
+                const newProductId = newProd.rows[0].product_id;
+
+                // Create description
+                await client.query(
+                  'INSERT INTO product_description (product_description_product_id, name, url_key, short_description, meta_title, meta_description) VALUES ($1, $2, $3, $4, $5, $6)',
+                  [newProductId, supplierName, urlKey, supplierName, supplierName, supplierName]
+                );
+
+                // Create inventory
+                await client.query(
+                  'INSERT INTO product_inventory (product_inventory_product_id, qty, manage_stock, stock_availability) VALUES ($1, $2, true, $3)',
+                  [newProductId, supplierStock, supplierStock > 0]
+                );
+
+                // Add image if available
+                if (supplierImage && hasProductImageTable) {
+                  await client.query(
+                    'INSERT INTO product_image (product_image_product_id, origin_image, is_main) VALUES ($1, $2, true)',
+                    [newProductId, supplierImage]
+                  );
+                }
+
+                // Add to maps for dedup
+                skuMap.set(supplierSku.toLowerCase(), { product_id: newProductId, sku: supplierSku, product_name: supplierName });
+                if (supplierPartNumber) partNumberMap.set(supplierPartNumber.toLowerCase(), { product_id: newProductId, sku: supplierSku, product_name: supplierName });
+
+                if (!result.created) result.created = 0;
+                result.created++;
+              } catch (createErr) {
+                // Likely duplicate url_key or sku, skip
+                if (!result.createErrors) result.createErrors = 0;
+                result.createErrors++;
+              }
               continue;
             }
 
@@ -573,6 +664,7 @@ async function main() {
     console.log(`${'='.repeat(60)}`);
 
     let totalMatched = 0;
+    let totalCreated = 0;
     let totalNames = 0;
     let totalStock = 0;
     let totalImages = 0;
@@ -583,15 +675,16 @@ async function main() {
         console.log(`  ${name}: ${r.skipped}`);
         continue;
       }
-      console.log(`  ${name}: matched=${r.matched}, names=${r.namesUpdated}, stock=${r.stockUpdated}, images=${r.imagesInserted}, errors=${r.errors.length}`);
+      console.log(`  ${name}: matched=${r.matched}, created=${r.created||0}, names=${r.namesUpdated}, stock=${r.stockUpdated}, images=${r.imagesInserted}, errors=${r.errors.length}, createErrors=${r.createErrors||0}`);
       totalMatched += r.matched || 0;
       totalNames += r.namesUpdated || 0;
       totalStock += r.stockUpdated || 0;
       totalImages += r.imagesInserted || 0;
       totalErrors += (r.errors || []).length;
+      totalCreated += r.created || 0;
     }
 
-    console.log(`\n  TOTALS: matched=${totalMatched}, names=${totalNames}, stock=${totalStock}, images=${totalImages}, errors=${totalErrors}`);
+    console.log(`\n  TOTALS: matched=${totalMatched}, created=${totalCreated}, names=${totalNames}, stock=${totalStock}, images=${totalImages}, errors=${totalErrors}`);
     console.log(`\nFinished at: ${new Date().toISOString()}`);
 
   } catch (err) {
