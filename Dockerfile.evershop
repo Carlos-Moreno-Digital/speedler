@@ -1,13 +1,15 @@
 FROM evershop/evershop:latest
 
 # Create directories
-RUN mkdir -p /app/translations/es /app/themes/speedler /app/media/speedler
+RUN mkdir -p /app/translations/es /app/themes/speedler/src/pages/frontStore/all /app/themes/speedler/dist/pages/frontStore/all /app/media/speedler
 
 # Copy translations
 COPY translations/es /app/translations/es
 
-# Copy theme (with pre-compiled dist)
-COPY themes/speedler /app/themes/speedler
+# Copy theme source and dist
+COPY themes/speedler/src /app/themes/speedler/src
+COPY themes/speedler/dist /app/themes/speedler/dist
+COPY themes/speedler/package.json /app/themes/speedler/package.json
 
 # Copy logo
 COPY public/logo.png /app/media/speedler/logo.png
@@ -20,6 +22,11 @@ COPY *.cjs /app/
 
 # Copy CSV
 COPY ProductosPropios.csv /app/
+
+# Build with theme - temporarily set NODE_ENV to development for theme validation
+ENV NODE_ENV=development
+RUN cd /app && npm run build || true
+ENV NODE_ENV=production
 
 EXPOSE 3000
 CMD ["npm", "run", "start"]
