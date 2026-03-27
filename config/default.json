@@ -43,7 +43,8 @@
     "headTags": {
       "metas": [],
       "links": [],
-      "scripts": []
+      "scripts": [],
+      "base": null
     }
   },
   "catalog": {
