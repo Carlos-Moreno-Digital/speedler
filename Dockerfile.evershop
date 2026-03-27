@@ -14,19 +14,17 @@ COPY themes/speedler/package.json /app/themes/speedler/package.json
 # Copy logo
 COPY public/logo.png /app/media/speedler/logo.png
 
-# Copy config
+# Copy config BEFORE build so theme is detected
 COPY config /app/config
 
-# Copy setup scripts
-COPY *.cjs /app/
+# Clean previous build output and rebuild with theme
+RUN rm -rf /app/.evershop 2>/dev/null; \
+    cd /app && NODE_ENV=development npm run build 2>&1 | tail -20
 
-# Copy CSV
+# Copy setup scripts and CSV (after build)
+COPY *.cjs /app/
 COPY ProductosPropios.csv /app/
 
-# Build with theme - temporarily set NODE_ENV to development for theme validation
-ENV NODE_ENV=development
-RUN cd /app && npm run build || true
-ENV NODE_ENV=production
-
 EXPOSE 3000
+ENV NODE_ENV=production
 CMD ["npm", "run", "start"]
