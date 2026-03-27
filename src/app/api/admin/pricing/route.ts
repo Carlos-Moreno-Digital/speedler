@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { applyPricingRule } from '@/lib/pricing';
+import { requireAdmin } from '@/lib/admin-auth';
 
 export async function GET() {
   try {
+    const auth = await requireAdmin();
+    if (auth.error) return auth.error;
+
     const rules = await prisma.pricingRule.findMany({
       orderBy: [{ priority: 'desc' }, { createdAt: 'desc' }],
     });
@@ -16,6 +20,9 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
+    const auth = await requireAdmin();
+    if (auth.error) return auth.error;
+
     const body = await request.json();
 
     const rule = await prisma.pricingRule.create({
@@ -43,6 +50,9 @@ export async function POST(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try {
+    const auth = await requireAdmin();
+    if (auth.error) return auth.error;
+
     const body = await request.json();
 
     const rule = await prisma.pricingRule.update({
@@ -70,6 +80,9 @@ export async function PUT(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
+    const auth = await requireAdmin();
+    if (auth.error) return auth.error;
+
     const { id } = await request.json();
     await prisma.pricingRule.delete({ where: { id } });
     return NextResponse.json({ message: 'Regla eliminada' });

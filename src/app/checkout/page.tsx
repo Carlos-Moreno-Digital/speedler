@@ -107,13 +107,53 @@ export default function CheckoutPage() {
         throw new Error(err.error || 'Error al procesar el pedido');
       }
 
-      const order = await res.json();
+      const { order } = await res.json();
       clearCart();
-      toast.success('Pedido realizado con éxito');
 
-      if (data.paymentMethod === 'REDSYS' && order.paymentUrl) {
-        window.location.href = order.paymentUrl;
+      // Handle different payment methods
+      if (data.paymentMethod === 'REDSYS') {
+        // Initiate Redsys payment
+        const payRes = await fetch('/api/payment/redsys', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ orderId: order.id }),
+        });
+        if (payRes.ok) {
+          const payData = await payRes.json();
+          if (payData.formUrl) {
+            window.location.href = payData.formUrl;
+            return;
+          }
+        }
+        toast.error('Error al iniciar el pago con tarjeta');
+        router.push(`/cuenta/pedidos?pending=${order.orderNumber}`);
+      } else if (data.paymentMethod === 'SEQURA') {
+        // Initiate SeQura payment
+        const payRes = await fetch('/api/payment/sequra', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ orderId: order.id }),
+        });
+        if (payRes.ok) {
+          const payData = await payRes.json();
+          if (payData.formUrl) {
+            window.location.href = payData.formUrl;
+            return;
+          }
+        }
+        toast.error('Error al iniciar el pago aplazado');
+        router.push(`/cuenta/pedidos?pending=${order.orderNumber}`);
+      } else if (data.paymentMethod === 'TRANSFER') {
+        // Bank transfer - show details
+        const payRes = await fetch('/api/payment/transfer', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ orderId: order.id }),
+        });
+        toast.success('Pedido registrado. Recibirás instrucciones de pago por email.');
+        router.push(`/cuenta/pedidos?transfer=${order.orderNumber}`);
       } else {
+        toast.success('Pedido realizado con éxito');
         router.push(`/cuenta/pedidos?success=${order.orderNumber}`);
       }
     } catch (err) {

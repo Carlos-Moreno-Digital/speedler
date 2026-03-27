@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { runSupplierSync } from '@/lib/supplier-sync';
+import { requireAdmin } from '@/lib/admin-auth';
 
 export async function GET() {
   try {
+    const auth = await requireAdmin();
+    if (auth.error) return auth.error;
+
     const suppliers = await prisma.supplierSync.findMany({
       include: {
         logs: {
@@ -22,6 +26,9 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
+    const auth = await requireAdmin();
+    if (auth.error) return auth.error;
+
     const body = await request.json();
 
     if (body.action === 'sync') {
@@ -50,6 +57,9 @@ export async function POST(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try {
+    const auth = await requireAdmin();
+    if (auth.error) return auth.error;
+
     const body = await request.json();
 
     const supplier = await prisma.supplierSync.update({
@@ -73,6 +83,9 @@ export async function PUT(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
+    const auth = await requireAdmin();
+    if (auth.error) return auth.error;
+
     const { id } = await request.json();
 
     await prisma.supplierSync.delete({ where: { id } });

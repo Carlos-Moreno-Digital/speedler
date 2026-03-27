@@ -205,7 +205,7 @@ export default function CarritoPage() {
                 </div>
                 {shippingEstimate > 0 && (
                   <p className="text-xs text-gray-400">
-                    Envío gratuito en pedidos superiores a 50,00 EUR
+                    Envío gratuito en pedidos superiores a 100,00 EUR
                   </p>
                 )}
 

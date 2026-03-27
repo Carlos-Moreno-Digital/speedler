@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 import { generateOrderNumber } from '@/lib/utils';
@@ -11,15 +13,31 @@ interface CartItem {
 
 export async function GET(request: NextRequest) {
   try {
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user) {
+      return NextResponse.json(
+        { error: 'No autorizado' },
+        { status: 401 }
+      );
+    }
+
+    const user = session.user as { id: string; role: string };
     const { searchParams } = request.nextUrl;
-    const userId = searchParams.get('userId');
     const status = searchParams.get('status');
     const page = Math.max(1, parseInt(searchParams.get('page') || '1'));
     const pageSize = 20;
 
     const where: Prisma.OrderWhereInput = {};
-    if (userId) {
-      where.userId = userId;
+
+    // Admins can view all orders or filter by userId; regular users only see their own
+    if (user.role === 'ADMIN') {
+      const userId = searchParams.get('userId');
+      if (userId) {
+        where.userId = userId;
+      }
+    } else {
+      where.userId = user.id;
     }
 
     if (status) {
