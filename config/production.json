@@ -8,7 +8,6 @@
       "password": "postgres"
     },
     "extensions": [],
-    "theme": "speedler",
     "redsys": {
       "status": false,
       "merchantCode": "",
