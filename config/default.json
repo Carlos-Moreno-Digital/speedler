@@ -33,9 +33,9 @@
   },
   "themeConfig": {
     "logo": {
-      "src": "/media/speedler/logo.png",
+      "src": "/images?src=/media/speedler/logo.png&w=200&h=60&f=png",
       "alt": "Speedler",
-      "width": 180,
+      "width": 200,
       "height": 60
     },
     "copyRight": "© 2026 Speedler. Todos los derechos reservados.",
