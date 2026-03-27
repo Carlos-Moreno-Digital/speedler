@@ -322,22 +322,25 @@ async function main() {
     // ------------------------------------------------------------------
     console.log('\n--- Loading existing products for matching ---');
     const existingProducts = await client.query(`
-      SELECT p.product_id, p.sku,
+      SELECT p.product_id, p.sku, p.part_number, p.ean,
              pd.name AS product_name
       FROM product p
       LEFT JOIN product_description pd ON pd.product_description_product_id = p.product_id
     `);
     console.log(`  Found ${existingProducts.rows.length} existing products`);
 
-    // Build SKU lookup map
+    // Build lookup maps
     const skuMap = new Map();
+    const partNumberMap = new Map();
+    const eanMap = new Map();
     for (const row of existingProducts.rows) {
-      if (row.sku) {
-        skuMap.set(row.sku.trim(), row);
-      }
+      if (row.sku) skuMap.set(row.sku.trim().toLowerCase(), row);
+      if (row.part_number) partNumberMap.set(row.part_number.trim().toLowerCase(), row);
+      if (row.ean) eanMap.set(row.ean.trim(), row);
     }
+    console.log(`  SKU map: ${skuMap.size}, PartNumber map: ${partNumberMap.size}, EAN map: ${eanMap.size}`);
 
-    // Build partNumber lookup - check if product table has a part_number column
+    // Check product table columns
     const productCols = await client.query(
       "SELECT column_name FROM information_schema.columns WHERE table_name = 'product' ORDER BY ordinal_position"
     );
@@ -451,13 +454,18 @@ async function main() {
               continue;
             }
 
-            // Try to match by SKU first, then by partNumber
+            // Try to match by SKU, then partNumber, then EAN
+            const supplierEan = mapping.ean ? (prod[mapping.ean] || '').trim() : '';
             let matchedProduct = null;
             if (supplierSku) {
-              matchedProduct = skuMap.get(supplierSku);
+              matchedProduct = skuMap.get(supplierSku.toLowerCase());
             }
-            if (!matchedProduct && supplierPartNumber && partNumberMap.size > 0) {
-              matchedProduct = partNumberMap.get(supplierPartNumber);
+            if (!matchedProduct && supplierPartNumber) {
+              matchedProduct = partNumberMap.get(supplierPartNumber.toLowerCase());
+              if (!matchedProduct) matchedProduct = skuMap.get(supplierPartNumber.toLowerCase());
+            }
+            if (!matchedProduct && supplierEan && supplierEan.length > 5) {
+              matchedProduct = eanMap.get(supplierEan);
             }
 
             if (!matchedProduct) {
