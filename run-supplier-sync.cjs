@@ -349,19 +349,8 @@ async function main() {
     console.log(`  product table columns: ${productColumnNames.join(', ')}`);
     console.log(`  Has part_number column: ${hasPartNumberCol}`);
 
-    const partNumberMap = new Map();
     if (hasPartNumberCol) {
-      const pnRows = await client.query(`
-        SELECT p.product_id, p.sku, p.part_number,
-               pd.name AS product_name
-        FROM product p
-        LEFT JOIN product_description pd ON pd.product_description_product_id = p.product_id
-        WHERE p.part_number IS NOT NULL AND p.part_number != ''
-      `);
-      for (const row of pnRows.rows) {
-        partNumberMap.set(row.part_number.trim(), row);
-      }
-      console.log(`  Loaded ${partNumberMap.size} products with part numbers`);
+      console.log(`  part_number column exists, already loaded ${partNumberMap.size} entries`);
     }
 
     // Check if product_inventory table exists and its schema
