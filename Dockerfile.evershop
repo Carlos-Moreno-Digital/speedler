@@ -1,5 +1,8 @@
 FROM evershop/evershop:latest
 
+# Create directories
+RUN mkdir -p /app/translations/es /app/themes/speedler /app/media/speedler
+
 # Copy translations
 COPY translations/es /app/translations/es
 
