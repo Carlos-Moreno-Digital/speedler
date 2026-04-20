@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "note": "Documentacion actualizada de Next.js 14, Prisma, NextAuth, Tailwind, React"
+    },
+    "magic": {
+      "type": "http",
+      "url": "https://mcp.magic.dev/mcp",
+      "note": "Generacion de componentes UI premium con 21st.dev"
+    }
+  }
+}
